@@ -1,3 +1,61 @@
 <script>
+function computerPlay(){
+    switch(Math.floor(Math.random()*3)){
+        case 0:
+            return 'Rock';
+            break;
+        case 1:
+            return 'Paper';
+            break;
+        default:
+            return 'Scissors';
+    }
+}
 
+function playRound(playerSelection, computerSelection){
+    const INPUT = ['rock', 'paper', 'scissors'];
+    const OUTPUT = ['Rock beats scissors', 'Paper beats rock', 'Scissors beats paper'];
+
+    const indexPlayer = INPUT.indexOf(playerSelection.toLowerCase());
+    const indexComputer = INPUT.indexOf(computerSelection.toLowerCase());
+    let resultText;
+    let winningIndex;
+
+    if(indexComputer === -1 || indexPlayer === -1){
+        return 'There was an error in the input';
+    }
+    if(indexPlayer === indexComputer){
+        return `There is a tie! Both of you chose ${INPUT[indexPlayer]}`;
+    }
+    
+    if((indexPlayer > indexComputer && !(indexPlayer === INPUT.length - 1 && indexComputer === 0)) ||
+    indexPlayer === 0 && indexComputer === INPUT.length -1){
+        resultText = 'You Win!';
+        winningIndex = indexPlayer;
+    }else{
+        resultText = 'You Lose!';
+        winningIndex = indexComputer;
+    }
+
+    return `${resultText} ${OUTPUT[winningIndex]}`;
+}
+
+function game(){
+    let computerScore = 0;
+    let playerScore = 0;
+    let roundOutput;
+    let resultRound;
+
+    for(let i=0;i<5;i++){
+        roundOutput = playRound(prompt('Choose between rock, paper and scissors'), computerPlay());
+        console.log(roundOutput);
+        resultRound = roundOutput.split(' ')[1];
+        if(resultRound === 'Win!'){
+            playerScore++;
+        }else if(resultRound === 'Lose!'){
+            computerScore++;
+        }
+    }
+    console.log(`Player: ${playerScore} Computer: ${computerScore}`)
+}
 </script>
