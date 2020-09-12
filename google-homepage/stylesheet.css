@@ -1,0 +1,13 @@
+.centered{
+    display: block;
+    margin: 10px auto;
+    position: relative;
+    top: 10rem;
+}
+
+input{
+    display: block;
+    width: 35em;
+    height: 1.5em;
+    border-radius:5px;
+}
