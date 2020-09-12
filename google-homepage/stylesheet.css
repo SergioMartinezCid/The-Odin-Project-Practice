@@ -5,9 +5,39 @@
     top: 10rem;
 }
 
-input{
+ .nav{
     display: block;
+    padding: 10px;
+    color: inherit;
+    text-decoration: none;
+    text-align: middle;
+    height: 100%;
+    line-height: 100%;
+}
+
+button.nav{
+    line-height: 80%;
+}
+
+ul{
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+li.left{
+    list-style-type: none;
+    float: left;
+    height: 2.4rem;
+}
+
+li.right{
+    list-style-type: none;
+    float:right;
+    height: 2.4rem;
+}
+
+input{
     width: 35em;
     height: 1.5em;
-    border-radius:5px;
+    border-radius:15px;
 }
