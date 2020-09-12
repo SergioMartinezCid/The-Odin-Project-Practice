@@ -1,43 +1,68 @@
-.centered{
-    display: block;
-    margin: 10px auto;
-    position: relative;
-    top: 10rem;
+html, body{
+    margin:0;
 }
 
- .nav{
+.nav-il{
     display: block;
+    margin: 0px 10px;
     padding: 10px;
-    color: inherit;
-    text-decoration: none;
-    text-align: middle;
     height: 100%;
     line-height: 100%;
+    text-align: middle;
 }
 
-button.nav{
-    line-height: 80%;
-}
-
-ul{
+.nav-ul{
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
     overflow: hidden;
-    vertical-align: middle;
+}
+
+#header-ul{
+    margin-top: 10px;
+}
+
+#footer-ul{
+    position: absolute;
+    bottom: 0px;
+    background-color: rgb(224, 221, 221);
+}
+
+li.left, li.right{
+    list-style-type: none;
+    height: 2.4rem;
 }
 
 li.left{
-    list-style-type: none;
     float: left;
-    height: 2.4rem;
 }
 
 li.right{
-    list-style-type: none;
-    float:right;
-    height: 2.4rem;
+    float: right;
+}
+
+a{
+    font-size: 0.8rem;
+    color:inherit;
+    text-decoration: none;
+}
+
+#btn-login{
+    line-height: 80%;
+    background-color: rgb(111, 150, 236);
+    color: white;
+}
+
+.centered{
+    display: block;
+    margin: 2rem auto;
+    position: relative;
+    top: 8rem;
+    text-align: center;
 }
 
 input{
     width: 35em;
-    height: 1.5em;
+    height: 2em;
     border-radius:15px;
 }
