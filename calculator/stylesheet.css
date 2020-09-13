@@ -1,0 +1,30 @@
+#screen{
+    position: absolute;
+    background-color: cyan;
+    border: 1px solid gray;
+    border-radius: 8px;
+    width: 50%;
+    height: 15%;
+}
+
+.calc-parent{
+    position: absolute;
+    top:17%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 50%;
+}
+
+.calc-button{
+    color: white;
+    background-color: black;
+    border-radius: 8px;
+    border: 1px solid gray;
+    text-align: center;
+    font-size: large;
+}
+
+a{
+    text-decoration: none;
+}
