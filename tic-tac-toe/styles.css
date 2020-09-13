@@ -1,0 +1,15 @@
+#root{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 30rem;
+    height: 30rem;
+}
+
+.ttt-square{
+    background-color: aliceblue;
+    border: 1px solid black;
+    text-align: center;
+    padding-top: 43%;
+    font-size: larger;
+}
