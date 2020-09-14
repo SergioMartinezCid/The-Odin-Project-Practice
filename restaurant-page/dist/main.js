@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/contact.js":
+/*!************************!*\
+  !*** ./src/contact.js ***!
+  \************************/
+/*! exports provided: getContactPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getContactPage\", function() { return getContactPage; });\nconst getContactPage = () => {\n    const div_contact_page = document.createElement('div');\n    div_contact_page.innerText = 'contacts';\n    return div_contact_page;\n}\n\n\n\n//# sourceURL=webpack:///./src/contact.js?");
+
+/***/ }),
+
 /***/ "./src/homepage.js":
 /*!*************************!*\
   !*** ./src/homepage.js ***!
@@ -106,7 +118,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _homepage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./homepage */ \"./src/homepage.js\");\n\n\nconst div_content = document.querySelector('#content');\n\nconst div_tabs = document.createElement('div');\n\nconst button_contact = document.createElement('button');\nconst button_homepage = document.createElement('button');\nconst button_menu = document.createElement('button');\n\nbutton_contact.innerText = 'Contact';\nbutton_homepage.innerText = 'Homepage';\nbutton_menu.innerText = 'Menu';\n\ndiv_tabs.appendChild(button_contact);\ndiv_tabs.appendChild(button_homepage);\ndiv_tabs.appendChild(button_menu);\n\ndiv_content.insertBefore(div_tabs, div_content.childNodes[0]);\ndiv_content.appendChild(Object(_homepage__WEBPACK_IMPORTED_MODULE_0__[\"getHomepage\"])());\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./contact */ \"./src/contact.js\");\n/* harmony import */ var _homepage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./homepage */ \"./src/homepage.js\");\n/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu */ \"./src/menu.js\");\n\n\n\n\nconst div_content = document.querySelector('#content');\n\nconst div_tabs = document.createElement('div');\ndiv_tabs.id = 'tabs';\n\nconst button_contact = document.createElement('button');\nconst button_homepage = document.createElement('button');\nconst button_menu = document.createElement('button');\n\nbutton_contact.innerText = 'Contact';\nbutton_homepage.innerText = 'Homepage';\nbutton_menu.innerText = 'Menu';\n\nbutton_contact.addEventListener('click', e => {\n    for(const child of div_content.childNodes){\n        child.remove();\n    }\n    div_content.appendChild(Object(_contact__WEBPACK_IMPORTED_MODULE_0__[\"getContactPage\"])());\n})\n\nbutton_homepage.addEventListener('click', e => {\n    for(const child of div_content.childNodes){\n        child.remove();\n    }\n    div_content.appendChild(Object(_homepage__WEBPACK_IMPORTED_MODULE_1__[\"getHomepage\"])());\n})\n\nbutton_menu.addEventListener('click', e => {\n    for(const child of div_content.childNodes){\n        child.remove();\n    }\n    div_content.appendChild(Object(_menu__WEBPACK_IMPORTED_MODULE_2__[\"getMenuPage\"])());\n});\n\ndiv_tabs.appendChild(button_contact);\ndiv_tabs.appendChild(button_homepage);\ndiv_tabs.appendChild(button_menu);\n\ndiv_content.parentNode.insertBefore(div_tabs, div_content);\ndiv_content.appendChild(Object(_homepage__WEBPACK_IMPORTED_MODULE_1__[\"getHomepage\"])());\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/menu.js":
+/*!*********************!*\
+  !*** ./src/menu.js ***!
+  \*********************/
+/*! exports provided: getMenuPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getMenuPage\", function() { return getMenuPage; });\nconst getMenuPage = () => {\n    const div_menu_page = document.createElement('div');\n    div_menu_page.innerText = 'menu';\n    return div_menu_page;\n}\n\n\n\n//# sourceURL=webpack:///./src/menu.js?");
 
 /***/ })
 

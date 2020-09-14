@@ -16,4 +16,4 @@ const getHomepage = () => {
     return div_homepage;
 }
 
-export {getHomepage};
+export { getHomepage };
