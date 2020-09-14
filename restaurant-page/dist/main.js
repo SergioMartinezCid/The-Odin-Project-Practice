@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getContactPage\", function() { return getContactPage; });\nconst getContactPage = () => {\n    const div_contact_page = document.createElement('div');\n    div_contact_page.innerText = 'contacts';\n    return div_contact_page;\n}\n\n\n\n//# sourceURL=webpack:///./src/contact.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getContactPage\", function() { return getContactPage; });\nconst getContactPage = () => {\n    const div_contact_page = document.createElement('div');\n    const headline =  document.createElement('h1');\n    const div_body = document.createElement('div');\n\n    headline.innerText = 'Contact Information';\n    div_body.innerText = 'random.address@mail.com';\n\n    div_contact_page.appendChild(headline);\n    div_contact_page.appendChild(div_body);\n\n    return div_contact_page;\n}\n\n\n\n//# sourceURL=webpack:///./src/contact.js?");
 
 /***/ }),
 
@@ -130,7 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _con
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getMenuPage\", function() { return getMenuPage; });\nconst getMenuPage = () => {\n    const div_menu_page = document.createElement('div');\n    div_menu_page.innerText = 'menu';\n    return div_menu_page;\n}\n\n\n\n//# sourceURL=webpack:///./src/menu.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getMenuPage\", function() { return getMenuPage; });\nconst getMenuPage = () => {\n    const div_menu_page = document.createElement('div');\n    const headline = document.createElement('h1');\n\n    const lu_outer = document.createElement('ul');\n    const li_first = document.createElement('li');\n    const lu_first = document.createElement('ul');\n    const li_f_steak = document.createElement('li');\n    const li_f_soup = document.createElement('li');\n    const li_dessert = document.createElement('li');\n    const lu_dessert = document.createElement('ul');\n    const li_d_fruit = document.createElement('li');\n    const li_d_puddin = document.createElement('li');\n\n    headline.innerText = 'Menu';\n    li_first.innerText = 'First Dish';\n    li_f_steak.innerText = 'Steak';\n    li_f_soup.innerText = 'Soup';\n    li_dessert.innerText = 'Dessert';\n    li_d_fruit.innerText = 'Fruit';\n    li_d_puddin.innerText = 'Pudding';\n\n    lu_first.appendChild(li_f_steak);\n    lu_first.appendChild(li_f_soup);\n    lu_dessert.appendChild(li_d_fruit);\n    lu_dessert.appendChild(li_d_puddin);\n    li_first.appendChild(lu_first);\n    li_dessert.appendChild(lu_dessert);\n    lu_outer.appendChild(li_first);\n    lu_outer.appendChild(li_dessert);\n    \n    div_menu_page.appendChild(headline);\n    div_menu_page.appendChild(lu_outer);\n\n    return div_menu_page;\n}\n\n\n\n//# sourceURL=webpack:///./src/menu.js?");
 
 /***/ })
 
