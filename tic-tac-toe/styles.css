@@ -1,7 +1,8 @@
-#root{
+#board{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    margin: 2rem;
     width: 30rem;
     height: 30rem;
 }
@@ -12,4 +13,26 @@
     text-align: center;
     padding-top: 43%;
     font-size: larger;
+}
+
+#menu{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin: 2rem;
+    width: 30rem;
+    height: 10rem;
+    background-color: rgb(229, 203, 247);
+    border: 2px solid black;
+    overflow: auto;
+    text-align: center;
+    padding-top: 2rem;
+}
+
+#menu > input{
+    width: 92%;
+}
+
+#button-start{
+    grid-column: span 2;
 }
