@@ -1,4 +1,3 @@
-// TODO represent all the todos of any given project (default project by default) as a list of links with the name and due date
 import { format } from 'date-fns';
 import { default_project } from "./todos";
 import { generateEditPage } from "./todo-edit";

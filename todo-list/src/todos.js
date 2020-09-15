@@ -2,6 +2,8 @@ class Project{
     constructor(name){
         if(typeof name !== 'string' || name === ''){
             throw Error('Invalid title; must be a non-empty string');
+        }else if(projects.reduce(project => project.name === "name").length !== 0){
+            throw Error('Project name already in use');
         }
         this._name = name;
         this._todos = new Array();
