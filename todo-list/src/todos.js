@@ -4,17 +4,17 @@ class Project{
     constructor(name){
         this._name = name;
         this._todos = new Array();
-        project.push(this);
+        projects.push(this);
     }
 
-    addTodo(todo){
+    _addTodo(todo){
         if(this._todos.includes(todo)){
             throw Error('This todo has already been added to the project');
         }
         this._todos.push(todo);
     }
 
-    removeTodo(todo){
+    _removeTodo(todo){
         if(!this._todos.includes(todo)){
             throw Error('This todo has not been addet to the project yet');
         }
@@ -22,6 +22,9 @@ class Project{
     }
 
     delete(){
+        if(this === default_project){
+            throw Error('The default project cannot be deleted');
+        }
         for(const todo of this._todos){
             todo.project = default_project;
         }
@@ -60,10 +63,10 @@ class Todo{
             newProject = default_project;
         }
         if(this.hasOwnProperty('_project')){
-            this._project.removeTodo(this);
+            this._project._removeTodo(this);
         }
         this._project = newProject;
-        newProject.addTodo(this);
+        newProject._addTodo(this);
     }
 
     get project(){
@@ -71,7 +74,7 @@ class Todo{
     }
 
     delete(){
-        this._project.removeTodo(this);
+        this._project._removeTodo(this);
     }
 
     set title(title){
@@ -127,4 +130,4 @@ class Todo{
     }
 }
 
-export { Project, Todo };
+export { Project, Todo, projects, default_project };
