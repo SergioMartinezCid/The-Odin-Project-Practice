@@ -1,1 +1,2 @@
-import * as todos from './todos';
+//import * as todos from './todos';
+// TODO join the body (list and edit) and sidebar
