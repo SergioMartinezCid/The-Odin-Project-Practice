@@ -1,7 +1,8 @@
-// TODO Check types in Project and dueDate of todos
-
 class Project{
     constructor(name){
+        if(typeof name !== 'string' || name === ''){
+            throw Error('Invalid title; must be a non-empty string');
+        }
         this._name = name;
         this._todos = new Array();
         projects.push(this);
