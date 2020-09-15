@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("//import * as todos from './todos';\n// TODO join the body (list and edit) and sidebar\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("//import * as todos from './todos';\n// TODO join the body (list and edit) and sidebar, and add a button for creating todos\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
