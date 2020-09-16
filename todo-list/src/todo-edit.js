@@ -2,7 +2,7 @@ import { parseISO, formatISO } from 'date-fns';
 import { generateTodoList } from './todo-list';
 import { default_project, projects, Todo } from './todos';
 
-const generateEditPage = todo => {
+const generateEditPage = function(todo = null){
     const root = document.querySelector('#root');
     const div_editor = document.createElement('div');
     const title = document.createElement('input');

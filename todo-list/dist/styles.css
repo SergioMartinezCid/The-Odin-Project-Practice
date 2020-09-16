@@ -1,5 +1,47 @@
-.todo-item{
+html, body{
+    height: 100%;
+}
+
+#header{
+    text-align: center;
+    height: 3rem;
     background-color: aliceblue;
+}
+
+#toggle-sidebar{
+    float: left;
+}
+
+#h1-title{
+    display: inline;
+}
+
+#create-todo{
+    float: right;
+}
+
+#content{
+    background-color: aquamarine;
+    height: 100%;
+}
+
+#sidebar{
+    display: none;
+    position: absolute;
+    width: 20rem;
+    height: 100%;
+    background-color: rgb(71, 139, 117);
+}
+
+.project-item{
+    background-color: rgb(128, 231, 183);
+    border: 1px solid black;
+    overflow: auto;
+    height: 3.2rem;
+}
+
+.todo-item{
+    background-color: rgb(230, 159, 252);
     border: 1px solid black;
     height: 2rem;
 }
