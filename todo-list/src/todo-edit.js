@@ -1,8 +1,12 @@
 // TODO represent and allow for edition/creation of all the features of the todo received as an argument.
-// The project can be chosen from a list
-import { projects, Todo } from './todos';
+
+//TODO make vertical, load data from todo or default values
+import { parseISO } from 'date-fns';
+import { generateTodoList } from './todo-list';
+import { default_project, projects, Todo } from './todos';
 
 const generateEditPage = todo => {
+    const root = document.querySelector('#root');
     const form = document.createElement('form');
     const title = document.createElement('input');
     const description = document.createElement('input');
@@ -11,7 +15,15 @@ const generateEditPage = todo => {
     const isComplete = document.createElement('input');
     const project = document.createElement('input');
     const datalist_project = document.createElement('datalist');
-    const submit = document.createElement('button');
+    const button_submit = document.createElement('button');
+    const button_delete = document.createElement('button');
+
+    datalist_project.id = "projects";
+    for(const project of projects){
+        let option = document.createElement('option');
+        option.value = project.name;
+        datalist_project.appendChild(option);
+    }
 
     title.type = 'text';
     description.type = 'text';
@@ -21,35 +33,56 @@ const generateEditPage = todo => {
     project.type = 'text';
 
     title.placeholder = 'Title';
-    description.placeholder = 'Placeholder';
+    description.placeholder = 'Description';
     priority.min = 0;
     priority.max = 2;
-    project.list = datalist_project.id = "projects";
-    submit.innerText = todo == null ? 'Create TODO' : 'Edit TODO';
+    project.placeholder = "Project (blank for default)"
+    project.setAttribute('list', datalist_project.id);
+    button_submit.innerText = todo == null ? 'Create TODO' : 'Edit TODO';
+    button_delete.innerText = 'Delete TODO';
+    button_delete.disabled = todo == null;
 
-    for(const project of projects){
-        let option = document.createElement('option');
-        option.value = project.name;
-        datalist_project.appendChild(option);
-    }
-
-    submit.addEventListener('click', e => {
-        const projectSearch = projects.reduce(p => p.name === project.value);
+    button_submit.addEventListener('click', e => {
+        const projectSearch = projects.filter(p => p.name === project.value);
         if(projectSearch.lenght === 0){
-            console.log('There is no project with such name');
-            return;
+            if(project.value.trim() !== ''){
+                console.log('There is no project with such name');
+                return;
+            }
+            projectSearch.push(default_project);
         }
 
-        // TODO Parse date, finish implementing
         if(todo == null){
-            const newTodo = new Todo(title.value, description.value, dueDate.value, priority.value, projectSearch[0]);
+            const newTodo = new Todo(title.value, description.value, parseISO(dueDate.value), Number.parseInt(priority.value), projectSearch[0]);
         }else{
-            newTodo.title = title.value;
-            newTodo.description = description.value;
-            newTodo.dueDate = dueDate.value;
-            newt
+            todo.title = title.value;
+            todo.description = description.value;
+            todo.dueDate = parseISO(dueDate.value);
+            todo.priority = Number.parseInt(priority.value);
+            todo.project = projectSearch[0];
         }
+
+        root.innerHTML = '';
+        root.appendChild(generateTodoList(projectSearch[0]));
     });
+
+    button_delete.addEventListener('click', e=> {
+        todo.delete();
+        root.innerHTML = '';
+        root.appendChild(generateTodoList());
+    });
+
+    form.appendChild(title);
+    form.appendChild(description);
+    form.appendChild(dueDate);
+    form.appendChild(priority);
+    form.appendChild(isComplete);
+    form.appendChild(project);
+    form.appendChild(datalist_project);
+    form.appendChild(button_submit);
+    form.appendChild(button_delete);
+
+    return form;
 }
 
 export { generateEditPage };

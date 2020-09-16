@@ -2,7 +2,7 @@ class Project{
     constructor(name){
         if(typeof name !== 'string' || name === ''){
             throw Error('Invalid title; must be a non-empty string');
-        }else if(projects.reduce(project => project.name === "name").length !== 0){
+        }else if(projects.filter(project => project.name === "name").length !== 0){
             throw Error('Project name already in use');
         }
         this._name = name;
@@ -66,6 +66,9 @@ class Todo{
             newProject = default_project;
         }
         if(this.hasOwnProperty('_project')){
+            if(this.project === newProject){ // No need to change the project
+                return;
+            }
             this._project._removeTodo(this);
         }
         this._project = newProject;
