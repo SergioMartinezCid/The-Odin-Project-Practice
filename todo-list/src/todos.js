@@ -1,3 +1,5 @@
+import { isValid } from "date-fns";
+
 class Project{
     constructor(name){
         if(typeof name !== 'string' || name === ''){
@@ -96,7 +98,7 @@ class Todo{
 
     set description(description){
         if(typeof description !== "string" || description.length === 0){
-            throw Error('Invalid title; must be a non-empty string');
+            throw Error('Invalid description; must be a non-empty string');
         }
         this._description = description;
     }
@@ -106,6 +108,9 @@ class Todo{
     }
 
     set dueDate(dueDate){
+        if(!isValid(dueDate)){
+            throw Error('Invalid date introduced');
+        }
         this._dueDate = dueDate;
     }
 
