@@ -1,1 +1,21 @@
-<p>app-book-table works!</p>
+<div *ngIf="books.length === 0">
+    <h3>
+        There are no books in the library yet. Introduce one using the pop-up window to the left
+    </h3>
+</div>
+<table *ngIf="books.length !== 0">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Number of Pages</th>
+        <th>Is it read?</th>
+        <th>Delete from library</th>
+    </tr>
+    <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.pages }}</td>
+        <td><input type="checkbox" [checked]="book.read" (change)="book.read = !book.read"></td>
+        <td><button (click)="books.splice(books.indexOf(book), 1)">DELETE</button></td>
+    </tr>
+</table>
