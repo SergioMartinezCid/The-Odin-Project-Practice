@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { books } from '../domain/book';
+import { books, deleteBook} from '../domain/book';
 
 @Component({
   selector: 'app-app-book-table',
@@ -9,6 +9,7 @@ import { books } from '../domain/book';
 
 export class AppBookTableComponent implements OnInit {
   books = books;
+  deleteBook = deleteBook;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,20 @@
+.popup-button{
+    background-color: rgb(168, 167, 167);
+    width: 2rem;
+    height: 3rem;
+}
+
+.popup-top{
+    width: 100%;
+    height: 4rem;
+}
+
+.popup-top > .popup-button {
+    float: right;
+}
+
+.popup-window{
+    background-color: rgba(230, 152, 178, 0.521);
+    border: 2px solid rgba(31, 66, 55, 0.692);
+    width: 20rem;
+}

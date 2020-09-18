@@ -1,1 +1,24 @@
-<p>app-book-add works!</p>
+<button *ngIf="!opened" class="popup-button" (click)="opened = true">&rsaquo;</button>
+
+<div class="popup-window" *ngIf="opened">
+    <div class="popup-top">
+        <button class="popup-button" (click)="opened=false">&lsaquo;</button>
+    </div>
+    <table>
+        <tr>
+            <td>Title</td>
+            <td><input class="popup-title" type="text" pattern="\s*.+" required></td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td><input class="popup-author" type="text" pattern="\s*.+" required></td>
+        </tr>
+        <tr>
+            <td>Pages</td>
+            <td><input class="popup-pages" type="number" min="1" required></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button (click)="addBook()">Submit</button></td>
+        </tr>
+    </table>
+</div>

@@ -16,6 +16,6 @@
         <td>{{ book.author }}</td>
         <td>{{ book.pages }}</td>
         <td><input type="checkbox" [checked]="book.read" (change)="book.read = !book.read"></td>
-        <td><button (click)="books.splice(books.indexOf(book), 1)">DELETE</button></td>
+        <td><button (click)="deleteBook(book)">DELETE</button></td>
     </tr>
 </table>
