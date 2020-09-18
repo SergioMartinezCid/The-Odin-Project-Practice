@@ -1,6 +1,6 @@
-<button *ngIf="!opened" class="popup-button" (click)="opened = true">&rsaquo;</button>
+<button *ngIf="!opened" class="popup-button float-atop" (click)="opened = true">&rsaquo;</button>
 
-<div class="popup-window" *ngIf="opened">
+<div class="popup-window float-atop" *ngIf="opened">
     <div class="popup-top">
         <button class="popup-button" (click)="opened=false">&lsaquo;</button>
     </div>
