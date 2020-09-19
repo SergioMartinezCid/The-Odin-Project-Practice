@@ -4,11 +4,22 @@
             <td>Country</td>
             <td>City</td>
             <td>Check for Fahrenheit</td>
+            <td rowspan="2"><button id="button-check" (click)="queryServer()">CHECK THE WEATHER</button></td>
         </tr>
         <tr>
-            <td><input type="text" placeholder="Choose a country here..." required></td>
-            <td><input type="text" placeholder="Choose a city here..." required></td>
-            <td><input type="checkbox"></td>
+            <td><input type="text" class="input-country" placeholder="Choose a country here..." list="countries" required 
+                (change)="updateCountry()"></td>
+            <td><input type="text" class="input-city" placeholder="Choose a city here..." list="cities" required 
+                (change)="updateCity()"></td>
+            <td><input type="checkbox" id="input-fahrenheit" [value]="fahrenheit" (change)="fahrenheit = !fahrenheit"></td>
         </tr>
     </table>
 </div>
+
+<datalist id="countries" *ngIf="countries.length > 0">
+    <option *ngFor="let country of countries" [value]="country"></option>
+</datalist>
+
+<datalist id="cities" *ngIf="countryIndex !== -1">
+    <option *ngFor="let city of cities[countryIndex]" [value]="city"></option>
+</datalist>
