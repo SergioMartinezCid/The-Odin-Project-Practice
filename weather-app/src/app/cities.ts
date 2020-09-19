@@ -1,7 +1,7 @@
 const countries: Array<string> = new Array();
 const cities: Array<Array<string>> = new Array();
 
-countries.push('gb');
+countries.push('uk');
 cities.push(new Array());
 cities[0].push('London');
 cities[0].push('Manchester');

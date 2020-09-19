@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NumberValueAccessor } from '@angular/forms';
 import { countries, cities } from '../cities';
 
 @Component({
@@ -29,10 +30,22 @@ export class ControlsComponent implements OnInit {
       this.cityIndex = cities[this.countryIndex].indexOf(this.cityText);
     }
   }
-  queryServer(): void{
-    // TODO
-    this.weatherData.temperature = '18 ºF';
-    this.weatherData.phenomenon = 'Light rain';
+  async queryServer(): Promise<void>{
+    try {
+      const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.countryText},${this.cityText}` +
+        `&appid=9d94d2238591f4e09c847ebae88c0b7f`);
+      const jsonObject = await response.json();
+      this.weatherData.phenomenon = jsonObject.weather['0'].main;
+      const celsius: number = (Number.parseFloat(jsonObject.main.temp) * 100 - 27315) / 100;
+
+      if (this.fahrenheit){
+        this.weatherData.temperature = `${(celsius * 9 / 5) + 32} ºF`;
+      } else{
+        this.weatherData.temperature = `${celsius} ºC`;
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   }
   constructor() { }
 
