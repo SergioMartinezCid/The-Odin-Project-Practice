@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { countries, cities } from '../cities';
 
 @Component({
@@ -7,6 +7,7 @@ import { countries, cities } from '../cities';
   styleUrls: ['./controls.component.css']
 })
 export class ControlsComponent implements OnInit {
+  @Input() weatherData;
   countries = countries;
   cities = cities;
   fahrenheit = false;
@@ -30,6 +31,8 @@ export class ControlsComponent implements OnInit {
   }
   queryServer(): void{
     // TODO
+    this.weatherData.temperature = '18 ºF';
+    this.weatherData.phenomenon = 'Light rain';
   }
   constructor() { }
 
