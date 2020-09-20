@@ -33,7 +33,7 @@ export class ControlsComponent implements OnInit {
   async queryServer(): Promise<void>{
     try {
       const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.countryText},${this.cityText}` +
-        `&appid=9d94d2238591f4e09c847ebae88c0b7f`, {
+        `&appid={YOUR_KEY}`, {
           mode: 'cors',
           headers: {
           'Access-Control-Allow-Origin': '*'
