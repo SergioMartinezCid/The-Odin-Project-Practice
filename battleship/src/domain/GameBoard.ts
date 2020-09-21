@@ -75,6 +75,10 @@ class GameBoard{
             throw Error('This coordinate has already been attacked');
         }
 
+        if (this.isSunk()){
+            throw Error('This gameboard has already been defeated');
+        }
+
         this.checkedBoard[x][y] = true;
         const successful = this.placedBoard[x][y] != null;
         if (successful){

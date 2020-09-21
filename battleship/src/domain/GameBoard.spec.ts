@@ -46,7 +46,8 @@ test('receiveAttack: incorrect coordinates', () => {
 
 test('receiveAttack: attack unsuccesful', () => {
     const board: GameBoard = new GameBoard(8, 8);
-    expect(board.receiveAttack(0, 0)).toBeFalsy();
+    board.placeShip(0, 0, 1, true);
+    expect(board.receiveAttack(0, 1)).toBeFalsy();
 });
 
 test('receiveAttack: attack succesful', () => {
@@ -57,8 +58,16 @@ test('receiveAttack: attack succesful', () => {
 
 test('receiveAttack: attack twice same coordinate', () => {
     const board: GameBoard = new GameBoard(8, 8);
+    board.placeShip(0, 1, 1);
     board.receiveAttack(0, 0);
     expect(() => board.receiveAttack(0, 0)).toThrow();
+});
+
+test('receiveAttack: sunk board', () => {
+    const board: GameBoard = new GameBoard(8, 8);
+    board.placeShip(0, 0, 1, true);
+    board.receiveAttack(0, 0);
+    expect(() => board.receiveAttack(0, 1)).toThrow();
 });
 
 test('missedAttacks: initial board', () => {
@@ -68,6 +77,7 @@ test('missedAttacks: initial board', () => {
 
 test('missedAttacks: failed several', () => {
     const board: GameBoard = new GameBoard(8, 8);
+    board.placeShip(1, 1, 1);
     board.receiveAttack(0, 0);
     board.receiveAttack(1, 0);
     expect(board.missedAttacks).toBe(2);
