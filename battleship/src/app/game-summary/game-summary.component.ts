@@ -8,14 +8,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class GameSummaryComponent implements OnInit {
   @Input() gameResult: string;
   @Output() chosenName = new EventEmitter<string>();
-  disabledControls = false;
+  buttonText = 'Submit name and start game';
 
   submitPlayerName(): void{
     const inputName = document.querySelector('#input-name') as HTMLInputElement;
     if (inputName.value.trim() === '' || inputName.value.trim() === 'Computer'){
       alert('The player name cannot be empty nor \'Computer\'');
     }else{
-      this.disabledControls = true;
+      this.buttonText = 'Submit name and restart game';
       this.chosenName.emit(inputName.value);
     }
   }

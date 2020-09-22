@@ -3,8 +3,6 @@ import { ComputerPlayer } from 'src/domain/ComputerPlayer';
 import { GameBoard } from 'src/domain/GameBoard';
 import { Player } from 'src/domain/Player';
 
-const playerTop: Player = new ComputerPlayer(new GameBoard(8, 8));
-playerTop.board.loadRandom();
 
 @Component({
   selector: 'app-root',
@@ -12,7 +10,7 @@ playerTop.board.loadRandom();
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  playerTop = playerTop;
+  playerTop = null;
   playerBottom = null;
   isActive = false;
   gameResult = '';
@@ -21,8 +19,10 @@ export class AppComponent {
 
   checkName(name: string): void{
     this.playerBottom = new Player(name, new GameBoard(8, 8));
+    this.playerTop = new ComputerPlayer(new GameBoard(8, 8));
     this.playerBottom.board.loadRandom();
-    Player.setOpponents(this.playerBottom, playerTop);
+    this.playerTop.board.loadRandom();
+    Player.setOpponents(this.playerBottom, this.playerTop);
     this.isActive = true;
   }
 
