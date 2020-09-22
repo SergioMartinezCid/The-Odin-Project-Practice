@@ -4,8 +4,8 @@ class GameBoard{
     readonly width: number;
     readonly height: number;
     private missedAttacksPrivate: number;
-    private checkedBoard: Array<Array<boolean>>;
-    private placedBoard: Array<Array<[number, Ship]>>;
+    readonly checkedBoard: Array<Array<boolean>>;
+    readonly placedBoard: Array<Array<[number, Ship]>>;
 
     constructor(width, height){
         if (width < 1 || height < 1){
@@ -26,16 +26,16 @@ class GameBoard{
         }
     }
 
-    placeShip(x: number, y: number, length: number, vertical: boolean = false): void{
+    placeShip(x: number, y: number, length: number, horizontal: boolean = false): void{
         if (x < 0 || x >= this.width || y < 0 || y >= this.height){
             throw Error('Coordinates must be within the limits of the board');
         }
-        if ((vertical && y + length - 1 >= this.height) || (!vertical && x + length - 1 >= this.width)){
+        if ((horizontal && y + length - 1 >= this.height) || (!horizontal && x + length - 1 >= this.width)){
             throw Error('The ship is too long; it goes beyond the board\'s dimensions');
         }
 
         let collides = false;
-        if (vertical){
+        if (horizontal){
             for (let i = y; i < y + length && !collides; i++){
                 if (this.placedBoard[x][i] != null){
                     collides = true;
@@ -55,7 +55,7 @@ class GameBoard{
 
         const newShip: Ship = new Ship(length);
 
-        if (vertical){
+        if (horizontal){
             for (let i = 0; i < length; i++){
                 this.placedBoard[x][i + y] = [i, newShip];
             }

@@ -9,7 +9,7 @@ import { GameSummaryComponent } from './game-summary/game-summary.component';
   declarations: [
     AppComponent,
     BoardComponent,
-    GameSummaryComponent
+    GameSummaryComponent,
   ],
   imports: [
     BrowserModule

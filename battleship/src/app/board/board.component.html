@@ -1,1 +1,7 @@
-<p>board works!</p>
+<table [id]="tableId">
+    <tr *ngFor="let row of player.board.placedBoard; index as i">
+        <td *ngFor="let ship of row; index as j"
+            [style.background-color]="getBackgroundColor(ship)"
+            (click)="manageCellClick(i, j)">{{ getCellContent(i, j) }}</td>
+    </tr>
+</table>
