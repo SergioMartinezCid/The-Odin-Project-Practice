@@ -25,4 +25,8 @@ export class AppComponent {
     Player.setOpponents(this.playerBottom, playerTop);
     this.isActive = true;
   }
+
+  endGame(winner: Player): void{
+    this.gameResult = `${winner.name} has won the match`;
+  }
 }

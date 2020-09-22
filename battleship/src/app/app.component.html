@@ -1,5 +1,15 @@
-<app-board *ngIf="playerTop != null" [hidden]="true" [active]="isActive" tableId="board-top" [player]="playerTop"></app-board>
+<app-board *ngIf="playerTop != null"
+    [hidden]="true"
+    [active]="isActive"
+    tableId="board-top"
+    [player]="playerTop"
+    (winner)="endGame($event)"></app-board>
 
-<app-board *ngIf="playerBottom != null" [hidden]="false" [active]="isActive" tableId="board-bottom" [player]="playerBottom"></app-board>
+<app-board *ngIf="playerBottom != null"
+    [hidden]="false"
+    [active]="false"
+    tableId="board-bottom"
+    [player]="playerBottom"
+    (winner)="endGame($event)"></app-board>
 
 <app-game-summary [gameResult]="gameResult" (chosenName)="checkName($event)"></app-game-summary>
