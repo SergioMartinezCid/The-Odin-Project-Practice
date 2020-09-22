@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { GameBoard } from 'src/domain/GameBoard';
+import { Component, OnInit, Input, ANALYZE_FOR_ENTRY_COMPONENTS, Output, EventEmitter } from '@angular/core';
 import { Player } from 'src/domain/Player';
 import { Ship } from 'src/domain/Ship';
 
@@ -13,6 +12,7 @@ export class BoardComponent implements OnInit {
   @Input() active: boolean;
   @Input() tableId: string;
   @Input() player: Player;
+  @Output() winner = new EventEmitter<Player>();
 
   getBackgroundColor(ship: [number, Ship]): string{
     if (ship != null && ship[1].isHit(ship[0])){
@@ -43,7 +43,16 @@ export class BoardComponent implements OnInit {
       return;
     }
 
-    this.player.receiveAttack(x, y);
+    try {
+      this.player.receiveAttack(x, y);
+    } catch (error) {
+      alert(error.message);
+    }
+    if (this.player.board.isSunk()){
+      this.winner.emit(this.player.opponent);
+    }else if (this.player.opponent.board.isSunk()){
+      this.winner.emit(this.player);
+    }
   }
 
   constructor() { }

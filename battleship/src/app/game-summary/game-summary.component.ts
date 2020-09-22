@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class GameSummaryComponent implements OnInit {
   @Input() gameResult: string;
-  disabledControls = false;
   @Output() chosenName = new EventEmitter<string>();
+  disabledControls = false;
 
   submitPlayerName(): void{
     const inputName = document.querySelector('#input-name') as HTMLInputElement;
