@@ -28,5 +28,6 @@ export class AppComponent {
 
   endGame(winner: Player): void{
     this.gameResult = `${winner.name} has won the match`;
+    this.isActive = false;
   }
 }
