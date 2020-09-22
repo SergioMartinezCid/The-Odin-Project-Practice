@@ -4,7 +4,7 @@ import { GameBoard } from 'src/domain/GameBoard';
 import { Player } from 'src/domain/Player';
 
 const playerTop: Player = new ComputerPlayer(new GameBoard(8, 8));
-// playerTop.board.loadRandom();
+playerTop.board.loadRandom();
 
 @Component({
   selector: 'app-root',
@@ -20,8 +20,9 @@ export class AppComponent {
   title = 'battleship';
 
   checkName(name: string): void{
-    this.playerBottom = new Player('Player 1', new GameBoard(8, 8));
-    // playerBottom.board.loadRandom();
+    this.playerBottom = new Player(name, new GameBoard(8, 8));
+    this.playerBottom.board.loadRandom();
     Player.setOpponents(this.playerBottom, playerTop);
+    this.isActive = true;
   }
 }
