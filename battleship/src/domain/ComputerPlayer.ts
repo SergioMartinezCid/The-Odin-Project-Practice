@@ -13,7 +13,7 @@ class ComputerPlayer extends Player{
         if (this.possibleMoves.length === 0){
             throw Error(`No available moves for ${this.name}`);
         }
-        if (!this.turn || super.opponent.board.isSunk()){
+        if (!this.turn || super.opponent.board.isSunk() || this.board.isSunk()){
             return;
         }
 
