@@ -26,16 +26,16 @@ class GameBoard{
         }
     }
 
-    placeShip(x: number, y: number, length: number, horizontal: boolean = false): void{
+    placeShip(x: number, y: number, length: number, vertical: boolean = true): void{
         if (x < 0 || x >= this.width || y < 0 || y >= this.height){
             throw Error('Coordinates must be within the limits of the board');
         }
-        if ((horizontal && y + length - 1 >= this.height) || (!horizontal && x + length - 1 >= this.width)){
+        if ((vertical && y + length - 1 >= this.height) || (!vertical && x + length - 1 >= this.width)){
             throw Error('The ship is too long; it goes beyond the board\'s dimensions');
         }
 
         let collides = false;
-        if (horizontal){
+        if (vertical){
             for (let i = y; i < y + length && !collides; i++){
                 if (this.placedBoard[x][i] != null){
                     collides = true;
@@ -55,7 +55,7 @@ class GameBoard{
 
         const newShip: Ship = new Ship(length);
 
-        if (horizontal){
+        if (vertical){
             for (let i = 0; i < length; i++){
                 this.placedBoard[x][i + y] = [i, newShip];
             }
@@ -105,6 +105,31 @@ class GameBoard{
         }
 
         return sunk;
+    }
+
+    loadRandom(ships: Array<number> = [5, 4, 3, 2, 1]): void{
+        ships.reverse();
+        for (const shipLenght of ships){
+            let stop = false;
+            while (!stop){
+                try {
+                    const vertical: boolean = Math.random() < 0.5;
+                    let x: number;
+                    let y: number;
+                    if (vertical){
+                        x = Math.floor(Math.random() * this.width);
+                        y = Math.floor(Math.random() * (this.height - shipLenght));
+                    }else{
+                        x = Math.floor(Math.random() * this.width - shipLenght);
+                        y = Math.floor(Math.random() * this.height);
+                    }
+                    this.placeShip(x, y, shipLenght, vertical);
+                    stop = true;
+                } catch (error) {
+                    continue;
+                }
+            }
+        }
     }
 
     get missedAttacks(): number{
