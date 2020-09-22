@@ -100,3 +100,8 @@ test('isSunk: sunk ship', () => {
     board.receiveAttack(0, 0);
     expect(board.isSunk()).toBeTruthy();
 });
+
+test('loadRandom: correct execution', () => {
+    const board: GameBoard = new GameBoard(8, 8);
+    expect(() => board.loadRandom()).not.toThrow();
+});
