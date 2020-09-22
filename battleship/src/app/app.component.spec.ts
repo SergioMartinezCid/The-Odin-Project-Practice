@@ -9,23 +9,16 @@ describe('AppComponent', () => {
       ],
     }).compileComponents();
   });
+});
 
-  it('should create the app', () => {
+it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'battleship'`, () => {
+it(`should have as title 'battleship'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('battleship');
+    expect(app.title).toEqual('Battleship');
   });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('battleship app is running!');
-  });
-});
