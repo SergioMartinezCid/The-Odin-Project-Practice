@@ -22,7 +22,6 @@ export class AppComponent {
   checkName(name: string): void{
     this.playerBottom = new Player('Player 1', new GameBoard(8, 8));
     // playerBottom.board.loadRandom();
-    console.log(name);
     Player.setOpponents(this.playerBottom, playerTop);
   }
 }
