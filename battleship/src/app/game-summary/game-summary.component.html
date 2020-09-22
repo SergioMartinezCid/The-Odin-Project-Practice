@@ -1,1 +1,5 @@
-<p>game-summary works!</p>
+<div id="game-summary">
+    <input type="text" id="input-name" [disabled]="disabledControls">
+    <button (click)="submitPlayerName()" [disabled]="disabledControls">Submit name and start game</button>
+    <div>{{ gameResult }}</div>
+</div>
