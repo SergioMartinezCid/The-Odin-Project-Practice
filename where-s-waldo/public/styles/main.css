@@ -1,0 +1,48 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+#top-bar{
+    background-color: rgb(38, 205, 247);
+    flex: 1;
+    padding: 1.3rem;
+    display: grid;
+    grid-template-areas: ". . ht . bl";
+}
+
+#header-title{
+    grid-area: ht;
+    text-align: center;
+}
+
+#button-login{
+    grid-area: bl;
+}
+
+#content{
+    background-color: white;
+    flex: 7;
+    display: grid;
+    text-align: center;
+}
+
+#img-where-waldo{
+    margin: 2rem auto 2rem;
+}
+
+#popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.507);
+    color: white;
+}
