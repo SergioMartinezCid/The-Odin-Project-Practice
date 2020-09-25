@@ -5,16 +5,14 @@ html, body{
 }
 
 body{
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-rows: 6rem auto;
 }
 #top-bar{
     background-color: rgb(38, 205, 247);
-    flex: 1;
-    padding: 1.3rem;
     display: grid;
     grid-template-areas: ". . ht . bl";
+    gap: 1rem;
 }
 
 #header-title{
@@ -24,17 +22,17 @@ body{
 
 #button-login{
     grid-area: bl;
+    margin: 1rem;
 }
 
 #content{
     background-color: white;
-    flex: 7;
-    display: grid;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 #img-where-waldo{
-    margin: 2rem auto 2rem;
+    margin: 2rem auto;
 }
 
 #popup{
