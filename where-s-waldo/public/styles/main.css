@@ -29,10 +29,11 @@ body{
     background-color: white;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #img-where-waldo{
-    margin: 2rem auto;
+    margin: auto;
 }
 
 #popup{

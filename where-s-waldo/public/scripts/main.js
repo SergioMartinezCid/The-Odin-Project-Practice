@@ -1,3 +1,35 @@
+'use-strict';
+
+const popup = document.querySelector('#popup');
+const imgWhereWaldo = document.querySelector('#img-where-waldo');
+const levels = ['02'];
+Object.freeze(levels);
+
+function generateLevelSelector(){
+    const divLevels = document.createElement('div');
+    levels.forEach(level => {
+        const divLevel = document.createElement('button');
+        divLevel.innerText = level;
+        divLevel.addEventListener('click', async (event) => {
+            popup.style.display = 'none';
+            try {
+                imgWhereWaldo.src = await firebase.storage().ref().child('playable-boards')
+                                    .child(`where-waldo-${level}.jpg`).getDownloadURL();
+                } catch (error) {
+                alert(error.message);
+            }
+        });
+        divLevels.appendChild(divLevel);
+    });
+    return divLevels;
+}
+
+popup.appendChild(generateLevelSelector());
+
 document.querySelector('#img-where-waldo').addEventListener('click', event => {
+    // Odlaw widthRatio 0.2431640625 heightRatio 0.5026041666666666 main.js:2:13
+    // Waldo widthRatio 0.53125 heightRatio 0.5026041666666666 main.js:2:13
+    // Wizard widthRatio 0.62890625 heightRatio 0.5104166666666666 main.js:2:13
+    // Wizard (the farthest from the center) radiuswidthRatio 0.6279296875 heightRatio 0.4713541666666667
     console.log(`widthRatio ${(event.pageX - event.target.offsetLeft)/event.target.clientWidth} heightRatio ${(event.pageY - event.target.offsetTop)/event.target.clientHeight}`)
 });
