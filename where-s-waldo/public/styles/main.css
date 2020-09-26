@@ -43,5 +43,13 @@ body{
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.507);
-    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-rectangle{
+    background-color: white;
+    padding: 2rem;
 }

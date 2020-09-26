@@ -1,30 +1,48 @@
-'use-strict';
-
 const popup = document.querySelector('#popup');
 const imgWhereWaldo = document.querySelector('#img-where-waldo');
-const levels = ['02'];
-Object.freeze(levels);
 
-function generateLevelSelector(){
-    const divLevels = document.createElement('div');
-    levels.forEach(level => {
+async function fillBoardList(){
+    const querySnapshot = await firebase.firestore().collection('boards').get();
+    return querySnapshot.docs.map(doc => doc.data()).filter(board => !!board.isValid);
+}
+
+function generateBoardButtons(parentDiv, boardList){
+    boardList.forEach(board => {
         const divLevel = document.createElement('button');
-        divLevel.innerText = level;
+        divLevel.innerText = board.name;
         divLevel.addEventListener('click', async (event) => {
             popup.style.display = 'none';
             try {
                 imgWhereWaldo.src = await firebase.storage().ref().child('playable-boards')
-                                    .child(`where-waldo-${level}.jpg`).getDownloadURL();
+                                    .child(board.subpath).getDownloadURL();
                 } catch (error) {
                 alert(error.message);
             }
         });
-        divLevels.appendChild(divLevel);
+        parentDiv.appendChild(divLevel);
     });
+}
+
+async function generateLevelSelector(){
+    const divLevels = document.createElement('div');
+    divLevels.classList.toggle('white-rectangle');
+    const subtitle = document.createElement('h2');
+    subtitle.innerText = 'Select one of the levels: ';
+    divLevels.appendChild(subtitle);
+
+    try {
+        generateBoardButtons(divLevels, await fillBoardList());
+    } catch (error) {
+        alert(error.message);
+    }
     return divLevels;
 }
 
-popup.appendChild(generateLevelSelector());
+// popup.appendChild(await generateLevelSelector());
+
+generateLevelSelector().then(levelSelector => {
+    popup.appendChild(levelSelector);
+});
 
 document.querySelector('#img-where-waldo').addEventListener('click', event => {
     // Odlaw widthRatio 0.2431640625 heightRatio 0.5026041666666666 main.js:2:13
