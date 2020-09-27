@@ -10,19 +10,20 @@ body{
 }
 #top-bar{
     background-color: rgb(38, 205, 247);
-    display: grid;
-    grid-template-areas: ". . ht . bl";
-    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: baseline;
+    /*gap: 1rem;*/
 }
 
-#header-title{
-    grid-area: ht;
+#top-bar > *{
     text-align: center;
+    margin: 1rem;
 }
 
-#button-login{
-    grid-area: bl;
-    margin: 1rem;
+button{
+    text-transform: capitalize;
 }
 
 #content{

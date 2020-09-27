@@ -1,5 +1,10 @@
 const popup = document.querySelector('#popup');
+popup.style.display = 'none';
 const imgWhereWaldo = document.querySelector('#img-where-waldo');
+
+const button_levels = document.querySelector('#button-levels');
+const button_login = document.querySelector('#button-login');
+const button_logout = document.querySelector('#button-logout');
 
 async function fillBoardList(){
     const querySnapshot = await firebase.firestore().collection('boards').get();
@@ -24,6 +29,7 @@ function generateBoardButtons(parentDiv, boardList){
 }
 
 async function generateLevelSelector(){
+    popup.hidden = false;
     const divLevels = document.createElement('div');
     divLevels.classList.toggle('white-rectangle');
     const subtitle = document.createElement('h2');
@@ -38,10 +44,50 @@ async function generateLevelSelector(){
     return divLevels;
 }
 
-// popup.appendChild(await generateLevelSelector());
+function getUserName() {
+    return firebase.auth().currentUser.displayName;
+}
 
-generateLevelSelector().then(levelSelector => {
-    popup.appendChild(levelSelector);
+function isUserSignedIn() {
+    return !!firebase.auth().currentUser;
+}
+
+button_login.addEventListener('click', event => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+});
+
+button_logout.addEventListener('click', event => {
+    firebase.auth().signOut();
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+        button_login.hidden = true;
+        button_logout.hidden = false;
+        button_logout.innerText = `SIGN OUT, ${getUserName()}`;
+        button_levels.disabled = false;
+        // var displayName = user.displayName;
+        // var email = user.email;
+        // var emailVerified = user.emailVerified;
+        // var photoURL = user.photoURL;
+        // var isAnonymous = user.isAnonymous;
+        // var uid = user.uid;
+        // var providerData = user.providerData;
+    } else {
+      // User is signed out.
+        button_logout.hidden = true;
+        button_login.hidden = false;
+        button_levels.disabled = true;
+    }
+});
+
+button_levels.addEventListener('click', async (event) => {
+    // popup.appendChild(await generateLevelSelector());
+    popup.style.display = 'flex';
+    popup.childNodes.forEach(child => child.remove());
+    popup.appendChild(await generateLevelSelector());
 });
 
 document.querySelector('#img-where-waldo').addEventListener('click', event => {
