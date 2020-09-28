@@ -16,9 +16,12 @@ export const startGame = functions.https.onCall((data, context) => {
     return new Promise(async (resolve, reject) => {
         // Returns the subpath to the image, game token and starts the game on the backend
         const imageEntry = await admin.firestore().collection('boardImages').doc(data.boardId).get();
-        if (imageEntry.data().subpath == null){
+        if (imageEntry.get('subpath') == null){
             reject('boardId not found');
+            return;
         }
+
+        const downloadPath = `playable-boards/${imageEntry.data().subpath}`;
 
         const newGame = await admin.firestore().collection('games').add(
             {
@@ -26,26 +29,11 @@ export const startGame = functions.https.onCall((data, context) => {
                 uid: context.auth.uid,
             }
         );
-        resolve({subpath: imageEntry.data().subpath, gameId : newGame.id})
+        resolve({path: downloadPath, gameId : newGame.id})
     });
 });
 
 /*
-export const cancelGame = functions.https.onCall((data, context) => {
-    if (!context.auth) return {status: 'error', code: 401, message: 'Not signed in'}
-
-    return new Promise(async (resolve, reject) => {
-        const entry = await admin.firestore().collection('games').doc(data.gameId).get();
-        if (entry == null){
-            reject('gameId not found');
-        }
-        if (context.auth?.uid !== entry.data().uid){
-            reject('Only the user who is playing that game can cancel it');
-        }
-        await admin.firestore().collection('games').doc(data.gameId).delete();
-    });
-});
-
 export const submitAnswer = functions.https.onCall((data, context) => {
     if (!context.auth) return {status: 'error', code: 401, message: 'Not signed in'}
 

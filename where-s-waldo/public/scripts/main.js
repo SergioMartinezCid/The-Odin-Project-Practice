@@ -11,27 +11,6 @@ let charSelTimeout = null;
 let gameStarted = false;
 let gameId = '';
 
-function startGame(boardId){
-
-    return new Promise(async (resolve, reject) => {
-        // Returns the subpath to the image, game token and starts the game on the backend
-        const imageEntry = await firebase.firestore().collection('boardImages').doc(boardId).get();
-        if (imageEntry.get('subpath') == null){
-            reject('boardId not found');
-            return;
-        }
-        const downloadPath = await firebase.storage().ref(`playable-boards/${imageEntry.data().subpath}`).getDownloadURL();
-
-        const newGame = await firebase.firestore().collection('games').add(
-            {
-                start: firebase.firestore.Timestamp.now(),
-                uid: 'd',
-            }
-        );
-        resolve({path: downloadPath, gameId : newGame.id})
-    });
-}
-
 function getUserName() {
     return firebase.auth().currentUser.displayName;
 }
@@ -63,9 +42,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         button_levels.disabled = true;
         imgWhereWaldo.src = 'images/waldo-original-image.png';
         gameStarted = false;
-        if (gameId !== ''){
-            firebase.functions().httpsCallable('cancelGame')({gameId});
-        }
+        gameId = '';
     }
 });
 
@@ -81,10 +58,10 @@ function generateBoardButtons(parentDiv, boardList){
         divLevel.addEventListener('click', async (event) => {
             popup.style.display = 'none';
             try {
-                const newGame = await startGame(board.id);
-                // const newGame = await firebase.functions().httpsCallable('startGame')({boardId: board.id});
-                imgWhereWaldo.src = newGame.path;
-                gameId = newGame.gameId;
+                // const newGame = await startGame(board.id);
+                const newGame = await firebase.functions().httpsCallable('startGame')({boardId: board.id});
+                imgWhereWaldo.src = await firebase.storage().ref(newGame.data.path).getDownloadURL(); ;
+                gameId = newGame.data.gameId;
             } catch (error) {
                 alert(error.message);
             }
