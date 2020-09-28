@@ -27,6 +27,10 @@ export const startGame = functions.https.onCall((data, context) => {
             {
                 start: admin.firestore.Timestamp.now(),
                 uid: context.auth.uid,
+                boardId: data.boardId,
+                foundWaldo: false,
+                foundOdlaw: false,
+                foundWizard: false,
             }
         );
         resolve({path: downloadPath, gameId : newGame.id})
@@ -41,12 +45,4 @@ export const submitAnswer = functions.https.onCall((data, context) => {
 
     });
 });
-
-export const getRecords = functions.https.onCall((data, context) => {
-    if (!context.auth) return {status: 'error', code: 401, message: 'Not signed in'}
-
-    return new Promise((resolve, reject) => {
-
-    });
-})
 */
