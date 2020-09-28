@@ -14,7 +14,6 @@ body{
     flex-direction: row;
     justify-content: space-between;
     align-content: baseline;
-    /*gap: 1rem;*/
 }
 
 #top-bar > *{
@@ -53,4 +52,10 @@ button{
 .white-rectangle{
     background-color: white;
     padding: 2rem;
+}
+
+#char-select{
+    background-color: wheat;
+    border: 1px solid black;
+    position: absolute;
 }
