@@ -20,6 +20,7 @@ function startGame(boardId){
             reject('boardId not found');
             return;
         }
+        const downloadPath = await firebase.storage().ref(`playable-boards/${imageEntry.data().subpath}`).getDownloadURL();
 
         const newGame = await firebase.firestore().collection('games').add(
             {
@@ -27,7 +28,7 @@ function startGame(boardId){
                 uid: 'd',
             }
         );
-        resolve({subpath: imageEntry.data().subpath, gameId : newGame.id})
+        resolve({path: downloadPath, gameId : newGame.id})
     });
 }
 
@@ -82,8 +83,7 @@ function generateBoardButtons(parentDiv, boardList){
             try {
                 const newGame = await startGame(board.id);
                 // const newGame = await firebase.functions().httpsCallable('startGame')({boardId: board.id});
-                console.log(newGame);
-                imgWhereWaldo.src = newGame.subpath;
+                imgWhereWaldo.src = newGame.path;
                 gameId = newGame.gameId;
             } catch (error) {
                 alert(error.message);
