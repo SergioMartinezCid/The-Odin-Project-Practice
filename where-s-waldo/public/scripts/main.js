@@ -11,6 +11,26 @@ let charSelTimeout = null;
 let gameStarted = false;
 let gameId = '';
 
+function startGame(boardId){
+
+    return new Promise(async (resolve, reject) => {
+        // Returns the subpath to the image, game token and starts the game on the backend
+        const imageEntry = await firebase.firestore().collection('boardImages').doc(boardId).get();
+        if (imageEntry.get('subpath') == null){
+            reject('boardId not found');
+            return;
+        }
+
+        const newGame = await firebase.firestore().collection('games').add(
+            {
+                start: firebase.firestore.Timestamp.now(),
+                uid: 'd',
+            }
+        );
+        resolve({subpath: imageEntry.data().subpath, gameId : newGame.id})
+    });
+}
+
 function getUserName() {
     return firebase.auth().currentUser.displayName;
 }
@@ -60,7 +80,8 @@ function generateBoardButtons(parentDiv, boardList){
         divLevel.addEventListener('click', async (event) => {
             popup.style.display = 'none';
             try {
-                const newGame = await firebase.functions().httpsCallable('startGame')({boardId: board.id});
+                const newGame = await startGame(board.id);
+                // const newGame = await firebase.functions().httpsCallable('startGame')({boardId: board.id});
                 console.log(newGame);
                 imgWhereWaldo.src = newGame.subpath;
                 gameId = newGame.gameId;

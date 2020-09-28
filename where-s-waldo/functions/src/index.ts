@@ -26,11 +26,11 @@ export const startGame = functions.https.onCall((data, context) => {
                 uid: context.auth.uid,
             }
         );
-        resolve(typeof imageEntry);
         resolve({subpath: imageEntry.data().subpath, gameId : newGame.id})
     });
 });
 
+/*
 export const cancelGame = functions.https.onCall((data, context) => {
     if (!context.auth) return {status: 'error', code: 401, message: 'Not signed in'}
 
@@ -46,7 +46,6 @@ export const cancelGame = functions.https.onCall((data, context) => {
     });
 });
 
-/*
 export const submitAnswer = functions.https.onCall((data, context) => {
     if (!context.auth) return {status: 'error', code: 401, message: 'Not signed in'}
 
