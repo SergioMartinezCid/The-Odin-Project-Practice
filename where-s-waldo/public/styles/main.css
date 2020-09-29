@@ -59,3 +59,7 @@ button{
     border: 1px solid black;
     position: absolute;
 }
+
+#char-select td{
+    box-shadow: inset 0px 0px 0.2rem;
+}
