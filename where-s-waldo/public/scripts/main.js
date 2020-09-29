@@ -6,57 +6,16 @@ const button_levels = document.querySelector('#button-levels');
 const button_login = document.querySelector('#button-login');
 const button_logout = document.querySelector('#button-logout');
 const char_select = document.querySelector('#char-select');
+const div_timer = document.querySelector('#div-timer');
 
 let charSelTimeout = null;
 let gameStarted = false;
 let gameId = '';
+let gameStartDate = null;
+let gameSeconds = null;
+let gameInterval = null;
 let clickedX = null;
 let clickedY = null;
-
-/*
-function submitAnswer(gameId, character, clickedX, clickedY){
-
-    return new Promise(async (resolve, reject) => {
-        let gameEntry = await firebase.firestore().collection('games').doc(gameId).get();
-        if (gameEntry.get('uid') == null){
-            reject('Invalid gameId');
-            return;
-        }
-
-        if (gameEntry.get(`found${character}`) === true){
-            reject('Character already scored');
-            return;
-        }
-
-        const boardSolutions = await firebase.firestore().collection('positions').doc(gameEntry.get('boardId')).get();
-        if (boardSolutions.data() == null){
-            reject('Invalid board');
-            return;
-        }
-        if (Math.abs(boardSolutions.get(`${character}X`) - clickedX) > 0.05 ||
-            Math.abs(boardSolutions.get(`${character}Y`) - clickedY) > 0.05){
-                resolve({message: 'Wrong position for that character'});
-                return;
-        }
-
-        await firebase.firestore().collection('games').doc(gameId).set({
-            [`found${character}`]: true
-        }, { merge: true });
-
-        gameEntry = await firebase.firestore().collection('games').doc(gameId).get();
-        if (gameEntry.get('foundWaldo') && gameEntry.get('foundOdlaw') && gameEntry.get('foundWizard')){
-            const endTime = Date.now();
-            await firebase.firestore().collection('games').doc(gameId).set({
-                end: endTime
-            }, {merge: true});
-            
-            resolve({won: true, message: `You won!. It took you ${Math.trunc((gameEntry.get('start') - endTime)/1000)} seconds`})
-        } else {
-            resolve({won: false, message: 'Correct!'});
-        }
-    });
-}
-*/
 
 function getUserName() {
     return firebase.auth().currentUser.displayName;
@@ -108,6 +67,17 @@ function generateBoardButtons(parentDiv, boardList){
                 const newGame = await firebase.functions().httpsCallable('startGame')({boardId: board.id});
                 imgWhereWaldo.src = await firebase.storage().ref(newGame.data.path).getDownloadURL(); ;
                 gameId = newGame.data.gameId;
+                gameSeconds = 0;
+                div_timer.hidden = false;
+                let gameInterval = setInterval(() => {
+                    if (gameStarted){
+                        gameSeconds++;
+                        div_timer.innerText = `${gameSeconds}s (Approx)`;
+                    } else {
+                        clearInterval(gameInterval);
+                        gameSeconds = 0;
+                    }
+                }, 1000);
             } catch (error) {
                 alert(error.message);
             }
