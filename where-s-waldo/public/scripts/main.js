@@ -13,6 +13,7 @@ let gameId = '';
 let clickedX = null;
 let clickedY = null;
 
+/*
 function submitAnswer(gameId, character, clickedX, clickedY){
 
     return new Promise(async (resolve, reject) => {
@@ -27,16 +28,13 @@ function submitAnswer(gameId, character, clickedX, clickedY){
             return;
         }
 
-        // TODO Retrieve positions correctly
         const boardSolutions = await firebase.firestore().collection('positions').doc(gameEntry.get('boardId')).get();
-        if (boardSolutions.get('WaldoX') == null){
+        if (boardSolutions.data() == null){
             reject('Invalid board');
             return;
         }
-        console.log(boardSolutions.data().WaldoX, clickedX);
-        console.log(boardSolutions.data().WaldoY, clickedY);
-        if (Math.abs(boardSolutions.get(`${character}X`) - clickedX) > 0.01 ||
-            Math.abs(boardSolutions.get(`${character}Y`) - clickedY) > 0.01){
+        if (Math.abs(boardSolutions.get(`${character}X`) - clickedX) > 0.05 ||
+            Math.abs(boardSolutions.get(`${character}Y`) - clickedY) > 0.05){
                 resolve({message: 'Wrong position for that character'});
                 return;
         }
@@ -47,12 +45,18 @@ function submitAnswer(gameId, character, clickedX, clickedY){
 
         gameEntry = await firebase.firestore().collection('games').doc(gameId).get();
         if (gameEntry.get('foundWaldo') && gameEntry.get('foundOdlaw') && gameEntry.get('foundWizard')){
-            resolve({message: `You won!. It took you ${1}`})
+            const endTime = Date.now();
+            await firebase.firestore().collection('games').doc(gameId).set({
+                end: endTime
+            }, {merge: true});
+            
+            resolve({won: true, message: `You won!. It took you ${Math.trunc((gameEntry.get('start') - endTime)/1000)} seconds`})
         } else {
-            resolve({message: 'Correct!'});
+            resolve({won: false, message: 'Correct!'});
         }
     });
 }
+*/
 
 function getUserName() {
     return firebase.auth().currentUser.displayName;
@@ -135,9 +139,6 @@ button_levels.addEventListener('click', async (event) => {
 });
 
 imgWhereWaldo.addEventListener('click', event => {
-    // Wizard widthRatio 0.62890625 heightRatio 0.5104166666666666 main.js:2:13
-    // Wizard (the farthest from the center) radiuswidthRatio 0.6279296875 heightRatio 0.4713541666666667
-    console.log(`widthRatio ${(event.pageX - event.target.offsetLeft)/event.target.clientWidth} heightRatio ${(event.pageY - event.target.offsetTop)/event.target.clientHeight}`)
 
     if (gameStarted){
         char_select.style.top = event.pageY+'px';
@@ -157,12 +158,19 @@ imgWhereWaldo.addEventListener('click', event => {
 });
 
 char_select.querySelectorAll('td').forEach(td => {
+
     td.addEventListener('click', async () => {
+        char_select.hidden = true;
         if (gameId !== '' && clickedX != null && clickedY != null){
-            // const result = await firebase.functions().httpsCallable('submitAnswer')({});
             try {
-                const result = await submitAnswer(gameId, td.dataset.character, clickedX, clickedY);
-                alert(result.message)
+                // const result = await submitAnswer(gameId, td.dataset.character, clickedX, clickedY);
+                const result = await firebase.functions().httpsCallable('submitAnswer')({
+                        gameId, character: td.dataset.character, clickedX, clickedY});
+                if (result.data.won){
+                    gameStarted = false;
+                    gameId = '';
+                }
+                alert(result.data.message)
             } catch (error) {
                 alert(error);
             }
