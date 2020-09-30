@@ -39,7 +39,7 @@ class Clock{
     }
 
     public resume(): void{
-        if (this.intervalId == null){
+        if (this.isPaused()){
             this.intervalId = setInterval(() => {
                 this.currentTime--;
                 if (this.currentTime <= 0){
@@ -51,14 +51,14 @@ class Clock{
     }
 
     public pause(): void{
-        if (this.intervalId != null){
+        if (!this.isPaused()){
             clearInterval(this.intervalId);
             this.intervalId = null;
         }
     }
 
     public stop(): void{
-        if (this.intervalId != null){
+        if (!this.isPaused()){
             clearInterval(this.intervalId);
             this.intervalId = null;
             this.currentTime = this.scheme.pomodoroDuration;
@@ -67,7 +67,7 @@ class Clock{
     }
 
     public done(): void{
-        if (this.intervalId == null){
+        if (this.isPaused()){
             this.changePeriod(this.scheme.getPeriodDuration() - this.currentTime);
             this.notifyObservers();
         }
@@ -110,6 +110,10 @@ class Clock{
 
     public getCurrentTime(): number{
         return this.currentTime;
+    }
+
+    public isPaused(): boolean{
+        return this.intervalId == null;
     }
 }
 
