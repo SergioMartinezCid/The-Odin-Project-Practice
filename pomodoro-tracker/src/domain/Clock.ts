@@ -25,7 +25,9 @@ class Clock{
      * @param coveredMinutes The number of minutes actually covered in this period
      */
     private changePeriod(coveredMinutes: number): void{
-        this.completedPomodoros.push(this.currentPomodoro.markAsDone(coveredMinutes));
+        if (!this.scheme.isPeriodBreak){
+            this.completedPomodoros.push(this.currentPomodoro.markAsDone(coveredMinutes));
+        }
         this.scheme.generatePeriod();
         this.currentTime = this.scheme.getPeriodDuration();
     }
