@@ -8,14 +8,38 @@ import { Scheme } from 'src/domain/Scheme';
   providedIn: 'root'
 })
 export class PomodoroService implements Observer{
+
   addedPomodoros = new Array<Pomodoro>();
   completedPomodoros = new Array<CompletedPomodoro>();
   createdSchemes = [new Scheme(25 * 60, 5 * 60, 15 * 60, 4)];
   clock = new Clock(this.createdSchemes[0], this.addedPomodoros, this.completedPomodoros);
+  currentTime = this.clock.getCurrentTime();
+  isBreak = this.clock.scheme.isPeriodBreak();
+  isPaused = this.clock.isPaused();
+  currentTitle = this.getTitle();
 
-  constructor() { }
+  constructor() {
+    this.clock.registerObserver(this);
+  }
 
   update(): void {
-    throw new Error('Method not implemented.');
+    this.currentTime = this.clock.getCurrentTime();
+    this.isPaused = this.clock.isPaused();
+
+    if (this.isBreak !== this.clock.scheme.isPeriodBreak()){
+      this.isBreak = this.clock.scheme.isPeriodBreak();
+      if (this.isBreak && this.addedPomodoros.length > 1 && this.addedPomodoros[0].count === 0){
+        this.addedPomodoros.splice(0, 1);
+      }
+      this.currentTitle = this.getTitle();
+    }
+  }
+
+  getTitle(): string{
+    if (this.addedPomodoros.length > 0 && !this.isBreak){
+      return  this.addedPomodoros[0].description;
+    } else {
+      return '';
+    }
   }
 }
