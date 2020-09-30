@@ -3,8 +3,8 @@ class Scheme{
     private shortBreakDurationP: number;
     private longBreakDurationP: number;
     private longBreakDelayP: number;
-    private breakCount = 0;
-    private isBreak = false;
+    private breakCount: number;
+    private isBreak: boolean;
     private periodDuration: number;
 
     constructor(pomodoroDuration: number, shortBreakDuration: number, longBreakDuration: number, longBreakDelay: number){
@@ -13,6 +13,7 @@ class Scheme{
         this.longBreakDuration = longBreakDuration;
         this.longBreakDelay = longBreakDelay;
         this.periodDuration = this.pomodoroDuration;
+        this.resetScheme();
     }
 
     /**
@@ -47,6 +48,11 @@ class Scheme{
         this.isBreak = result.isBreak;
         this.breakCount = result.breakCount;
         this.periodDuration = result.cumulativeDuration;
+    }
+
+    public resetScheme(): void{
+        this.breakCount = 0;
+        this.isBreak = false;
     }
 
     public getFinalizationTime(n: number): number{
