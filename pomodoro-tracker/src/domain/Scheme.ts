@@ -1,10 +1,10 @@
 class Scheme{
-    public pomodoroDurationP: number;
-    public shortBreakDurationP: number;
-    public longBreakDurationP: number;
-    public longBreakDelayP: number;
+    private pomodoroDurationP: number;
+    private shortBreakDurationP: number;
+    private longBreakDurationP: number;
+    private longBreakDelayP: number;
     private breakCount = 0;
-    private isBreak = true;
+    private isBreak = false;
     private periodDuration: number;
 
     constructor(pomodoroDuration: number, shortBreakDuration: number, longBreakDuration: number, longBreakDelay: number){
@@ -84,7 +84,7 @@ class Scheme{
     }
 
     public get longBreakDuration(): number{
-        return this.longBreakDuration;
+        return this.longBreakDurationP;
     }
 
     public set longBreakDuration(longBreakDuration: number){
@@ -95,7 +95,7 @@ class Scheme{
     }
 
     public get longBreakDelay(): number{
-        return this.longBreakDelay;
+        return this.longBreakDelayP;
     }
 
     public set longBreakDelay(longBreakDelay: number){
