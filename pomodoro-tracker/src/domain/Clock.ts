@@ -5,28 +5,34 @@ import { Scheme } from './Scheme';
 
 class Clock{
     private schemeP: Scheme;
-    private currentPomodoroP: Pomodoro;
+    private addedPomodoros: Array<Pomodoro>;
     private completedPomodoros: Array<CompletedPomodoro>;
     private currentTime: number;
     private intervalId: NodeJS.Timeout = null;
     private observerCollection: Array<Observer>;
 
-    constructor(scheme: Scheme, currentPomodoro: Pomodoro){
+    constructor(scheme: Scheme, addedPomodoros: Array<Pomodoro>, completedPomodoros: Array<CompletedPomodoro>){
         this.scheme = scheme;
-        this.currentPomodoro = currentPomodoro;
         this.currentTime = this.scheme.pomodoroDuration;
+        this.addedPomodoros = addedPomodoros;
+        this.completedPomodoros = completedPomodoros;
         this.observerCollection = new Array();
-        this.completedPomodoros = new Array();
     }
 
     /**
-     * Method for changing the period uniformly
+     * Method for changing the period
      *
      * @param coveredMinutes The number of minutes actually covered in this period
      */
     private changePeriod(coveredMinutes: number): void{
         if (!this.scheme.isPeriodBreak){
-            this.completedPomodoros.push(this.currentPomodoro.markAsDone(coveredMinutes));
+            let completedPomodoro: CompletedPomodoro;
+            if (this.addedPomodoros.length <= 0){
+                completedPomodoro = this.addedPomodoros.splice(0, 1)[0].markAsDone(coveredMinutes);
+            } else {
+                completedPomodoro = new CompletedPomodoro('', '', coveredMinutes);
+            }
+            this.completedPomodoros.push(completedPomodoro);
         }
         this.scheme.generatePeriod();
         this.currentTime = this.scheme.getPeriodDuration();
@@ -92,14 +98,6 @@ class Clock{
 
     public set scheme(scheme: Scheme){
         this.schemeP = scheme;
-    }
-
-    public get currentPomodoro(): Pomodoro{
-        return this.currentPomodoroP;
-    }
-
-    public set currentPomodoro(pomodoro: Pomodoro){
-        this.currentPomodoroP = pomodoro;
     }
 
     public getLastCompletedPomodoro(): CompletedPomodoro{
