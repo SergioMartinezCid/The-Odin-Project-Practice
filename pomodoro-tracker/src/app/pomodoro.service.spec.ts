@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PomodoroServiceService } from './pomodoro-service.service';
+import { PomodoroService} from './pomodoro.service';
 
 describe('PomodoroServiceService', () => {
-  let service: PomodoroServiceService;
+  let service: PomodoroService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PomodoroServiceService);
+    service = TestBed.inject(PomodoroService);
   });
 
   it('should be created', () => {
