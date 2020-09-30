@@ -72,7 +72,7 @@ class Scheme{
     }
 
     public set pomodoroDuration(pomodoroDuration: number){
-        if (pomodoroDuration <= 0 || !Number.isInteger(pomodoroDuration)){
+        if (pomodoroDuration <= 59 || !Number.isInteger(pomodoroDuration) || pomodoroDuration % 60 !== 0){
             throw new Error('All durations must be positive integers');
         }
         this.pomodoroDurationP = pomodoroDuration;
@@ -83,7 +83,7 @@ class Scheme{
     }
 
     public set shortBreakDuration(shortBreakDuration: number){
-        if (shortBreakDuration <= 0 || !Number.isInteger(shortBreakDuration)){
+        if (shortBreakDuration <= 59 || !Number.isInteger(shortBreakDuration) || shortBreakDuration % 60 !== 0){
             throw new Error('All durations must be positive integers');
         }
         this.shortBreakDurationP = shortBreakDuration;
@@ -94,7 +94,7 @@ class Scheme{
     }
 
     public set longBreakDuration(longBreakDuration: number){
-        if (longBreakDuration <= 0 || !Number.isInteger(longBreakDuration)){
+        if (longBreakDuration <= 59 || !Number.isInteger(longBreakDuration) || longBreakDuration % 60 !== 0){
             throw new Error('All durations must be positive integers');
         }
         this.longBreakDurationP = longBreakDuration;
