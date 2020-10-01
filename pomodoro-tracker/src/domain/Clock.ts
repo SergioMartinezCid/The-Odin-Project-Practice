@@ -1,4 +1,3 @@
-import { setInterval } from 'timers';
 import { CompletedPomodoro } from './CompletedPomodoro';
 import { Pomodoro } from './Pomodoro';
 import { Scheme } from './Scheme';
@@ -9,7 +8,7 @@ class Clock{
     private addedPomodoros: Array<Pomodoro>;
     private completedPomodoros: Array<CompletedPomodoro>;
     private currentTime: number;
-    private intervalId: NodeJS.Timeout = null;
+    private intervalId: any = null;
     private observerCollection: Array<Observer>;
 
     constructor(scheme: Scheme, addedPomodoros: Array<Pomodoro>, completedPomodoros: Array<CompletedPomodoro>){
@@ -26,12 +25,15 @@ class Clock{
      * @param coveredMinutes The number of minutes actually covered in this period
      */
     private changePeriod(coveredMinutes: number): void{
-        if (!this.scheme.isPeriodBreak){
+        if (!this.scheme.isPeriodBreak()){
             let completedPomodoro: CompletedPomodoro;
             if (this.addedPomodoros.length <= 0){
-                completedPomodoro = this.addedPomodoros.splice(0, 1)[0].markAsDone(coveredMinutes);
-            } else {
                 completedPomodoro = new CompletedPomodoro('', '', coveredMinutes);
+            } else {
+                completedPomodoro = this.addedPomodoros[0].markAsDone(coveredMinutes);
+                if (this.addedPomodoros[0].count <= 0){
+                    this.addedPomodoros.splice(0, 1);
+                }
             }
             this.completedPomodoros.push(completedPomodoro);
         }
@@ -55,6 +57,7 @@ class Clock{
         if (!this.isPaused()){
             clearInterval(this.intervalId);
             this.intervalId = null;
+            this.notifyObservers();
         }
     }
 
@@ -67,11 +70,11 @@ class Clock{
         }
     }
 
+    // Same action as skip
     public done(): void{
-        if (this.isPaused()){
-            this.changePeriod(this.scheme.getPeriodDuration() - this.currentTime);
-            this.notifyObservers();
-        }
+        this.changePeriod(this.scheme.getPeriodDuration() - this.currentTime);
+        this.resume();
+        this.notifyObservers();
     }
 
     public registerObserver(o: Observer): void{
