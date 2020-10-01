@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PomodoroService} from '../pomodoro.service';
 
 @Component({
   selector: 'app-tracker-clock',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tracker-clock.component.css']
 })
 export class TrackerClockComponent implements OnInit {
+  pomodoroService: PomodoroService;
+  Math = Math;
 
-  constructor() { }
+  constructor(pomodoroService: PomodoroService) {
+    this.pomodoroService = pomodoroService;
+  }
 
   ngOnInit(): void {
   }

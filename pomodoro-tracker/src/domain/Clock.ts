@@ -2,6 +2,7 @@ import { setInterval } from 'timers';
 import { CompletedPomodoro } from './CompletedPomodoro';
 import { Pomodoro } from './Pomodoro';
 import { Scheme } from './Scheme';
+import { Observer } from './Observer';
 
 class Clock{
     private schemeP: Scheme;

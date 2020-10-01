@@ -34,7 +34,7 @@ class Scheme{
             isBreak = !isBreak;
             if (isBreak){
                 breakCount = (breakCount + 1) % this.longBreakDelay;
-                cumulativeDuration += breakCount === 0 ? this.longBreakDelay : this.shortBreakDuration;
+                cumulativeDuration += breakCount === 0 ? this.longBreakDuration : this.shortBreakDuration;
             } else {
                 cumulativeDuration += this.pomodoroDuration;
             }
