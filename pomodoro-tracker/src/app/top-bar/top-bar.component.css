@@ -1,0 +1,17 @@
+:host{
+    background-color: rgb(73, 73, 243);
+    color: white;
+}
+
+* {
+    margin: 2rem;
+}
+
+.icon-circle{
+    display: inline-block;
+    border-radius: 50%;
+    background-color: red;
+    color: rgb(73, 73, 243);
+    width: 1rem;
+    height: 1rem;
+}
