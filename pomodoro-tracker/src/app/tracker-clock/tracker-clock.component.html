@@ -1,1 +1,18 @@
-<p>tracker-clock works!</p>
+<div class="pomodoro-clock" [ngClass]="pomodoroService.isBreak ? 'break' : 'noBreak'">
+    <span>{{ Math.floor(pomodoroService.currentTime / 60) | number:'2.0-0' }}:{{ pomodoroService.currentTime % 60 | number:'2.0-0'}}</span>
+    <span>{{ pomodoroService.currentTitle }}</span>
+
+    <span *ngIf="pomodoroService.isPaused">
+        <button (click)="pomodoroService.clock.resume()">Resume</button>
+        <button (click)="pomodoroService.clock.done()" [disabled]="!pomodoroService.isBreak &&
+            pomodoroService.currentTime === pomodoroService.clock.scheme.getPeriodDuration()">
+            {{ pomodoroService.isBreak ? 'Skip' : 'Done' }}
+        </button>
+    </span>
+
+    <span *ngIf="!pomodoroService.isPaused">
+        <button (click)="pomodoroService.clock.pause()">Pause</button>
+        <button (click)="pomodoroService.clock.done()" *ngIf="pomodoroService.isBreak">Skip</button>
+        <button (click)="pomodoroService.clock.stop()" *ngIf="!pomodoroService.isBreak">Stop</button>
+    </span>
+</div>

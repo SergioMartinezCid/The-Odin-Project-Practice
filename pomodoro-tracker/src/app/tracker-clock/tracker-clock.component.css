@@ -1,0 +1,17 @@
+.pomodoro-clock{
+    width: 60rem;
+    height: 20rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.noBreak{
+    background-color: red;
+}
+
+.break{
+    background-color: green;
+}
