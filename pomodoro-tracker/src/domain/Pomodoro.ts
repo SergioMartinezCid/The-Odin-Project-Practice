@@ -1,6 +1,7 @@
 import { CompletedPomodoro } from './CompletedPomodoro';
+import { PomodoroItem } from './PomodoroItem';
 
-class Pomodoro{
+class Pomodoro implements PomodoroItem{
     private categoryP: string;
     private descriptionP: string;
     private countP: number;

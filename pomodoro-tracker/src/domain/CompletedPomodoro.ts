@@ -1,4 +1,6 @@
-class CompletedPomodoro{
+import { PomodoroItem } from './PomodoroItem';
+
+class CompletedPomodoro implements PomodoroItem{
     private categoryP: string;
     private descriptionP: string;
     readonly dateTime: Date;
