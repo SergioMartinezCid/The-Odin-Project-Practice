@@ -77,6 +77,10 @@ class Clock{
         this.notifyObservers();
     }
 
+    getFinalizationTime(): number{
+        return this.scheme.getFinalizationTime(this.addedPomodoros.length);
+    }
+
     public registerObserver(o: Observer): void{
         if (!this.observerCollection.includes(o)){
             this.observerCollection.push(o);
