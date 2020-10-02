@@ -28,13 +28,13 @@ export class PomodoroService implements Observer{
   update(): void {
     this.currentTime = this.clock.getCurrentTime();
     this.isPaused = this.clock.isPaused();
+    this.currentTitle = this.getTitle();
 
     if (this.isBreak !== this.clock.scheme.isPeriodBreak()){
       this.isBreak = this.clock.scheme.isPeriodBreak();
       if (this.isBreak && this.addedPomodoros.length > 1 && this.addedPomodoros[0].count === 0){
         this.addedPomodoros.splice(0, 1);
       }
-      this.currentTitle = this.getTitle();
     }
   }
 
