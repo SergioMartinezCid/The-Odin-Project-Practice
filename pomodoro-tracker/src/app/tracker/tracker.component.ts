@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PomodoroService } from '../pomodoro.service';
 
 @Component({
   selector: 'app-tracker',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tracker.component.css']
 })
 export class TrackerComponent implements OnInit {
-
-  constructor() { }
+  pomodoroService: PomodoroService;
+  constructor(pomodoroService: PomodoroService) {
+    this.pomodoroService = pomodoroService;
+  }
 
   ngOnInit(): void {
   }

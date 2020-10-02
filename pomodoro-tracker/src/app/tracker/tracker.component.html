@@ -1,1 +1,5 @@
 <app-tracker-clock></app-tracker-clock>
+
+<app-tracker-section [pomodoroItems]="pomodoroService.addedPomodoros" [subtype]="'todo'"></app-tracker-section>
+
+<app-tracker-section *ngIf="pomodoroService.completedPomodoros.length !== 0" [pomodoroItems]="pomodoroService.completedPomodoros" [subtype]="'done'"></app-tracker-section>

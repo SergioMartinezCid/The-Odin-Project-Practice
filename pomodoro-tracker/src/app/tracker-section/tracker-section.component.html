@@ -1,1 +1,22 @@
-<p>tracker-section works!</p>
+<div>{{ updateTitle(pomodoroItems) }}</div>
+
+<table>
+    <tr *ngIf="subtype === 'todo'">
+        <th><input [value]="inputCategory" (change)="inputCategory= $event.target.value" type="text" placeholder="Category"></th>
+        <th><input [value]="inputDescription" (change)="inputDescription = $event.target.value" type="text" placeholder="Short description"></th>
+        <th colspan="2"><button  (click)="addPomodoro()">+</button></th>
+    </tr>
+
+    <tr *ngFor="let item of pomodoroItems">
+        <td>{{ item.category }}</td>
+        <td>{{ item.description }}</td>
+        
+        <td *ngIf="subtype === 'todo'">{{ item.count }} </td>
+        <td *ngIf="subtype === 'todo'"><button (click)="increasePomodoroCount(item, 1)">+</button></td>
+        <td *ngIf="subtype === 'todo'"><button (click)="increasePomodoroCount(item, -1)">-</button></td>
+        <td *ngIf="subtype === 'todo'"><button (click)="markAsDone(item)">✔</button></td>
+
+        <td *ngIf="subtype === 'done'"><button (click)="reAdd(item)">↻</button></td>
+        <td *ngIf="subtype === 'done'"><button (click)="removeItem(item)">🗑</button></td>
+    </tr>
+</table>
