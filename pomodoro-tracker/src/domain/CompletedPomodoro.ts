@@ -32,6 +32,13 @@ class CompletedPomodoro implements PomodoroItem{
     public set description(description: string){
         this.descriptionP = description.trim();
     }
+
+    public get count(): number{
+        return 1;
+    }
+
+    public set count(count: number){
+    }
 }
 
 export { CompletedPomodoro };
