@@ -4,7 +4,8 @@
     <tr *ngIf="subtype === 'todo'">
         <th><input [value]="inputCategory" (change)="inputCategory= $event.target.value" type="text" placeholder="Category"></th>
         <th><input [value]="inputDescription" (change)="inputDescription = $event.target.value" type="text" placeholder="Short description"></th>
-        <th colspan="2"><button  (click)="addPomodoro()">+</button></th>
+        <th>&nbsp;</th>
+        <th colspan="3"><button style="width: 100%;" (click)="addPomodoro()">+</button></th>
     </tr>
 
     <tr *ngFor="let item of pomodoroItems">
