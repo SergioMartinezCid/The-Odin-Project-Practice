@@ -60,8 +60,18 @@ export class TrackerSectionComponent implements OnInit {
     }
   }
 
-  getCategories(pomodoroItems: Array<PomodoroItem>){
+  getCategories(pomodoroItems: Array<PomodoroItem>): Array<any>{
     const resultArray = new Array();
+
+    pomodoroItems.forEach( item => {
+      const category = item.category.trim() === '' ? 'undefined' : item.category.trim();
+      const index = resultArray.findIndex(el => el.hasOwnProperty('category') && el.category === category);
+      if (index < 0){
+        resultArray.push({category, count: item.count});
+      } else {
+        resultArray[index].count += item.count;
+      }
+    });
 
     return resultArray;
   }

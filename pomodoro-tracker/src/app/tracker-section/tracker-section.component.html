@@ -22,10 +22,10 @@
     </tr>
 </table>
 
-<div>
-    <span>
+<div *ngIf="pomodoroItems.length > 0" id="bottom-line">
+    <div>
         Categories 
-        <span *ngFor="let catCount of getCategories(pomodoroItems)"> {{ `#${catCount.category}·${catCount.count}` }}</span>
-        </span>
-    </span>
+        <div class="category" *ngFor="let catCount of getCategories(pomodoroItems)"> {{ '#' + catCount.category + '·' + catCount.count.toString() }}</div>
+    </div>
+    <button (click)="pomodoroItems.length = 0">🗑</button>
 </div>

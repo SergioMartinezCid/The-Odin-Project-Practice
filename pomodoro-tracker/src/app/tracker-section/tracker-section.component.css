@@ -1,0 +1,16 @@
+:host{
+    width: 60rem;
+    display: block;
+}
+
+.category{
+    display: inline-block;
+    border: 1px solid wheat;
+    margin: 0.4rem;
+}
+
+#bottom-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
