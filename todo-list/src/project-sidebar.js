@@ -20,6 +20,7 @@ const generateSidebar = () => {
   const button_new_project = document.createElement('button');
 
   button_new_project.innerText = '+ Project';
+  button_new_project.id = 'add-project';
   button_new_project.addEventListener('click', (e) => {
     try {
       const project_name = prompt('Which will be the name of the new project?');
