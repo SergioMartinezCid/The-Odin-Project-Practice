@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigurationService } from '../configuration.service';
 
 @Component({
   selector: 'app-settings',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-
-  constructor() { }
+  configurationService: ConfigurationService;
+  constructor(configurationService: ConfigurationService) {
+    this.configurationService = configurationService;
+  }
 
   ngOnInit(): void {
   }
