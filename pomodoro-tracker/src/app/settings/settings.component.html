@@ -1,4 +1,15 @@
 <h2>Schemes</h2>
+<h3>Pomodoro duration, Short break duration, Long break duration, Long break delay</h3>
+
+<button (click)="pomodoroService.createScheme()">NEW SCHEME</button>
+<div class ="scheme" *ngFor="let scheme of pomodoroService.createdSchemes">
+    <button *ngIf="pomodoroService.clock.scheme !== scheme" (click)="pomodoroService.clock.scheme = scheme">✓</button><!-- Select this Scheme -->
+    <input type="number" min="1" [value]="scheme.pomodoroDuration/60" (click)="scheme.pomodoroDuration = ($event.target.value)*60">
+    <input type="number" min="1" [value]="scheme.shortBreakDuration/60" (click)="scheme.shortBreakDuration = ($event.target.value)*60">
+    <input type="number" min="1" [value]="scheme.longBreakDuration/60" (click)="scheme.longBreakDuration = ($event.target.value)*60">
+    <input type="number" min="1" [value]="scheme.longBreakDelay" (click)="scheme.longBreakDelay = $event.target.value">
+    <button *ngIf="pomodoroService.defaultPomodoro !== scheme" (click)="pomodoroService.removeScheme(scheme)">❌</button><!-- Remove this Scheme -->
+</div>
 
 <h2>Notification Volume</h2>
 

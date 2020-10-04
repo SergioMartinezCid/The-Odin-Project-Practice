@@ -45,4 +45,19 @@ export class PomodoroService implements Observer{
       return '';
     }
   }
+
+  createScheme(): void{
+    const newScheme = new Scheme(25 * 60, 5 * 60, 15 * 60, 4);
+    this.createdSchemes.push(newScheme);
+  }
+
+  removeScheme(scheme: Scheme): void{
+    const index = this.createdSchemes.indexOf(scheme);
+    if (index < 0){
+      return;
+    }
+
+    this.createdSchemes.splice(index, 1);
+    this.clock.scheme = this.defaultPomodoro;
+  }
 }
