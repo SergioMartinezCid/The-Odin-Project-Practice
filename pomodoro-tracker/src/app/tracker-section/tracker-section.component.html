@@ -21,3 +21,11 @@
         <td *ngIf="subtype === 'done'"><button (click)="removeItem(item)">🗑</button></td>
     </tr>
 </table>
+
+<div>
+    <span>
+        Categories 
+        <span *ngFor="let catCount of getCategories(pomodoroItems)"> {{ `#${catCount.category}·${catCount.count}` }}</span>
+        </span>
+    </span>
+</div>

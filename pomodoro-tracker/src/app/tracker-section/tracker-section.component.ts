@@ -60,6 +60,12 @@ export class TrackerSectionComponent implements OnInit {
     }
   }
 
+  getCategories(pomodoroItems: Array<PomodoroItem>){
+    const resultArray = new Array();
+
+    return resultArray;
+  }
+
   ngOnInit(): void {
   }
 
