@@ -1,3 +1,7 @@
 <span>
     Pomodoro Tracker
 </span>
+<span>
+    <button (click)="toggleSettings()">{{ toggle ? '⚙ Settings' : 'Back to the main menu' }}</button>
+    {{ configurationService.username }}
+</span>
