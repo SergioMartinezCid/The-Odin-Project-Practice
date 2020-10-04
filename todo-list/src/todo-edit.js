@@ -63,11 +63,13 @@ const generateEditPage = function (todo = null) {
     try {
       if (todo == null) {
         const newTodo = new Todo(title.value, description.value, parseISO(dueDate.value), Number.parseInt(priority.value), projectSearch[0]);
+        newTodo.isComplete = isComplete.checked;
       } else {
         todo.title = title.value;
         todo.description = description.value;
         todo.dueDate = parseISO(dueDate.value);
         todo.priority = Number.parseInt(priority.value);
+        todo.isComplete = isComplete.checked;
         todo.project = projectSearch[0];
       }
     } catch (error) {
