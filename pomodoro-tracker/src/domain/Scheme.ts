@@ -106,7 +106,7 @@ class Scheme{
 
     public set longBreakDelay(longBreakDelay: number){
         if (longBreakDelay <= 0 || !Number.isInteger(longBreakDelay)){
-            throw new Error('All durations must be positive integers');
+            throw new Error('The delay between long breaks must be a positive integer');
         }
         this.longBreakDelayP = longBreakDelay;
     }
