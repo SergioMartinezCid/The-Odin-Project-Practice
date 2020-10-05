@@ -60,7 +60,9 @@ export class PomodoroService implements Observer{
     }
 
     this.createdSchemes.splice(index, 1);
-    this.clock.scheme = this.defaultPomodoro;
+    if (scheme === this.clock.scheme){
+      this.clock.scheme = this.defaultPomodoro;
+    }
   }
 
   playAudio(): void{
