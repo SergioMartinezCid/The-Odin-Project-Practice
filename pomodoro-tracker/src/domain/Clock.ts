@@ -28,7 +28,7 @@ class Clock{
         if (!this.scheme.isPeriodBreak()){
             let completedPomodoro: CompletedPomodoro;
             if (this.addedPomodoros.length <= 0){
-                completedPomodoro = new CompletedPomodoro('', '', coveredMinutes);
+                completedPomodoro = new CompletedPomodoro('', 'no description', coveredMinutes);
             } else {
                 completedPomodoro = this.addedPomodoros[0].markAsDone(coveredMinutes);
                 if (this.addedPomodoros[0].count <= 0){

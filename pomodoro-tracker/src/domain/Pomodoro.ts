@@ -44,8 +44,10 @@ class Pomodoro implements PomodoroItem{
         if (this.count <= 0){
             throw new Error('This Pomodoro should have been discarded when it reached a count of 0');
         }
+
         this.count -= 1;
-        return new CompletedPomodoro(this.category, this.description, duration);
+        const description = this.description === '' ? this.description = 'no description' : this.description;
+        return new CompletedPomodoro(this.category, description, duration);
     }
 }
 
