@@ -1,9 +1,15 @@
 :host{
     background-color: rgb(73, 73, 243);
-    color: white;
     display: flex;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     align-items: center;
+}
+
+button{
+    height: 2rem;
+    width: 6rem;
 }
 
 * {

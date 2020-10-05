@@ -1,6 +1,15 @@
 :host{
     width: 60rem;
     display: block;
+    border-top: thin white;
+}
+
+:host > * {
+    width: 100%;
+}
+
+table td, th *{
+    width: 98%;
 }
 
 .category{
