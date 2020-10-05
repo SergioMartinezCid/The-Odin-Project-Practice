@@ -5,5 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigurationService {
   username = 'Anonymous';
+  volume = 1;
   constructor() { }
 }

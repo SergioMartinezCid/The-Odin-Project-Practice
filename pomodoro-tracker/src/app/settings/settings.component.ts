@@ -10,10 +10,17 @@ import { PomodoroService } from '../pomodoro.service';
 export class SettingsComponent implements OnInit {
   configurationService: ConfigurationService;
   pomodoroService: PomodoroService;
+  parseInt = parseInt;
 
   constructor(configurationService: ConfigurationService, pomodoroService: PomodoroService) {
     this.configurationService = configurationService;
     this.pomodoroService = pomodoroService;
+  }
+
+  updateVolume(percentage: number): void{
+    this.configurationService.volume = Math.min(Math.max(percentage / 100, 0), 1);
+    this.pomodoroService.notificationAudio.volume = this.configurationService.volume;
+    this.pomodoroService.playAudio();
   }
 
   ngOnInit(): void {

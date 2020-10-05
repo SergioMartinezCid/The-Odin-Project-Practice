@@ -14,6 +14,7 @@ export class PomodoroService implements Observer{
   completedPomodoros = new Array<CompletedPomodoro>();
   defaultPomodoro = new Scheme(25 * 60, 5 * 60, 15 * 60, 4);
   createdSchemes = [this.defaultPomodoro];
+  notificationAudio = new Audio('../assets/another-hand-bell.mp3');
 
   clock = new Clock(this.createdSchemes[0], this.addedPomodoros, this.completedPomodoros);
   currentTime = this.clock.getCurrentTime();
@@ -31,6 +32,7 @@ export class PomodoroService implements Observer{
     this.currentTitle = this.getTitle();
 
     if (this.isBreak !== this.clock.scheme.isPeriodBreak()){
+      this.playAudio();
       this.isBreak = this.clock.scheme.isPeriodBreak();
       if (this.isBreak && this.addedPomodoros.length > 1 && this.addedPomodoros[0].count === 0){
         this.addedPomodoros.splice(0, 1);
@@ -59,5 +61,10 @@ export class PomodoroService implements Observer{
 
     this.createdSchemes.splice(index, 1);
     this.clock.scheme = this.defaultPomodoro;
+  }
+
+  playAudio(): void{
+    this.notificationAudio.currentTime = 0;
+    this.notificationAudio.play();
   }
 }
