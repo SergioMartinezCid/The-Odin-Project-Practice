@@ -14,7 +14,7 @@ export class PomodoroService implements Observer{
   completedPomodoros = new Array<CompletedPomodoro>();
   defaultPomodoro = new Scheme(25 * 60, 5 * 60, 15 * 60, 4);
   createdSchemes = [this.defaultPomodoro];
-  notificationAudio = new Audio('../assets/another-hand-bell.mp3');
+  notificationAudio = new Audio('assets/another-hand-bell.mp3');
 
   clock = new Clock(this.createdSchemes[0], this.addedPomodoros, this.completedPomodoros);
   currentTime = this.clock.getCurrentTime();
