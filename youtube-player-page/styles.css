@@ -4,6 +4,21 @@ html, body {
     height: 100%;
 }
 
+h1, h2{
+    font-family: Roboto, Arial, sans-serif;
+    font-weight: 400;
+}
+
+h1{
+    font-size: 18px;
+    color: #030303;
+}
+
+h2{
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+}
+
 a{
     text-decoration: none;
     color: gray;
