@@ -79,12 +79,12 @@ body{
 }
 
 #content, #side-bar{
-    margin-left: 9rem;
     margin-top: 1.5rem;
 }
 
 #content{
     grid-area: content;
+    margin-left: 9rem;
 }
 
 #youtube-video{
