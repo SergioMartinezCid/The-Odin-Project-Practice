@@ -94,4 +94,45 @@ body{
 
 #side-bar{
     grid-area: side-bar;
+    margin-right: 9rem;
+
+}
+
+#side-bar-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 0.5rem;
+}
+
+#side-bar-top img{
+    vertical-align: middle;
+}
+
+#side-bar hr{
+    border-color: rgb(235, 235, 235);
+}
+
+.suggested-video{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.suggested-video > *{
+    margin: 0.25rem;
+}
+
+.suggested-video > img{
+    height: 5.5rem;
+}
+
+.suggested-video-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    margin-right: 2rem;
 }
