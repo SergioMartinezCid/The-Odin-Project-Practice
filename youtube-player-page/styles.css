@@ -1,12 +1,24 @@
 html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 a{
     text-decoration: none;
     color: gray;
     font-size: 2rem;
+}
+
+body{
+    background-color: #f9f9f9;
+
+    display: grid;
+    grid-template-areas:
+    "top-bar top-bar"
+    "content side-bar";
+    grid-template-rows: 3.55rem auto;
+    grid-template-columns: 79rem auto;
 }
 
 #top-bar{
@@ -21,17 +33,18 @@ a{
     align-items: center;
 }
 
-#navicon{
-    float: left;
+#top-bar > *{
+    width: 13rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    margin: 0 0.9rem;
 }
 
 #logo{
     height: 2rem;
-    float:left;
-}
-
-#settings, #apps, #create, #login{
-    float: right;
 }
 
 #login{
@@ -50,16 +63,20 @@ a{
     vertical-align: middle;
 }
 
+#content, #side-bar{
+    margin-left: 9rem;
+    margin-top: 1.5rem;
+}
+
 #content{
-    background-color: blue;
-    display: inline-block;
-    width: 79rem;
-    height: 75rem;
+    grid-area: content;
+}
+
+#youtube-video{
+    width: 69rem;
+    height: 44rem;
 }
 
 #side-bar{
-    background-color: green;
-    display: inline-block;
-    width: calc(100% - 79rem);
-    height: 75rem;
+    grid-area: side-bar;
 }
