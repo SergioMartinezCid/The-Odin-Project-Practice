@@ -1,0 +1,38 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body{
+    background-color: #eceef1;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1.5fr;
+}
+
+.centered-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header{
+    padding: 1.25rem;
+}
+
+header img{
+    display: block;
+}
+
+footer{
+    font-size: 0.75rem;
+    font-weight: lighter;
+    color: rgb(80, 80, 80);
+    font-family: "AvenirNext", Avenir, "Helvetica Neue", Helvetica, Arial sans-serif;
+}
+
+footer a{
+    text-decoration: none;
+    color: rgb(57, 128, 175);
+    margin: 0.35rem;
+}
