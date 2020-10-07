@@ -7,7 +7,7 @@ html, body{
 body{
     background-color: #eceef1;
     display: grid;
-    grid-template-rows: 1fr 4fr 1.5fr;
+    grid-template-rows: 7rem auto 6rem;
     grid-gap: 2rem 0;
     margin: 0 auto;
 }
@@ -15,7 +15,6 @@ body{
 a{
     text-decoration: none;
     color: rgb(57, 128, 175);
-    margin: 0.35rem;
 }
 
 hr{
@@ -30,7 +29,7 @@ hr{
 }
 
 .smaller-font{
-    font-size: 0.875rem;
+    font-size: 0.625rem;
 }
 
 .wrap-text{
@@ -43,6 +42,7 @@ header{
 
 header img{
     display: block;
+    margin: 0.35rem;
 }
 
 #sign-in{
@@ -50,24 +50,35 @@ header img{
     border: 1px solid gray;
     height: 100%;
     width: 23.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #sign-in-inputs{
     align-items: flex-start;
-    margin: 1rem;
+    margin: 2rem;
 }
 
 #sign-in-inputs > *{
-    margin: 0.25rem 0;
+    margin: 0.6rem 0;
 }
 
 #sign-in-button{
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(14, 83, 173);
-    width: 90%;
-    height: 2.5rem;
+    background-color: #0077c5;
+    border: 0;
+    border-radius: 0.25rem;
+    width: 100%;
+    height: 3rem;
     color: white;
+}
+
+#sign-in-recaptcha{
+    background-color: #eceef1;
+    text-align: center;
+    padding: 1rem 0;
 }
 
 footer{
