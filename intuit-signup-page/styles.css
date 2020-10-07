@@ -8,12 +8,33 @@ body{
     background-color: #eceef1;
     display: grid;
     grid-template-rows: 1fr 4fr 1.5fr;
+    grid-gap: 2rem 0;
+    margin: 0 auto;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(57, 128, 175);
+    margin: 0.35rem;
+}
+
+hr{
+    width: 85%;
+    border-color: white;
 }
 
 .centered-column{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.smaller-font{
+    font-size: 0.875rem;
+}
+
+.wrap-text{
+    text-align: center;
 }
 
 header{
@@ -24,15 +45,34 @@ header img{
     display: block;
 }
 
+#sign-in{
+    background-color: white;
+    border: 1px solid gray;
+    height: 100%;
+    width: 23.75rem;
+}
+
+#sign-in-inputs{
+    align-items: flex-start;
+    margin: 1rem;
+}
+
+#sign-in-inputs > *{
+    margin: 0.25rem 0;
+}
+
+#sign-in-button{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(14, 83, 173);
+    width: 90%;
+    height: 2.5rem;
+    color: white;
+}
+
 footer{
     font-size: 0.75rem;
     font-weight: lighter;
     color: rgb(80, 80, 80);
     font-family: "AvenirNext", Avenir, "Helvetica Neue", Helvetica, Arial sans-serif;
-}
-
-footer a{
-    text-decoration: none;
-    color: rgb(57, 128, 175);
-    margin: 0.35rem;
 }
