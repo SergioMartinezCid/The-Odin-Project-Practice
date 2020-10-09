@@ -1,0 +1,75 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.minimal-button{
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 1.5rem;
+    transition: 0.9s;
+}
+
+.minimal-button:hover{
+    background-color: rgba(216, 216, 216, 0.486);
+}
+
+.minimal-a{
+    text-decoration: none;
+    font-weight: bold;
+    font-family: nyt-franklin, helvetica, arial, sans-serif;
+    color: black;
+}
+
+.minimal-a:hover{
+    text-decoration: underline;
+}
+
+.color-button{
+    background-color: #567b95;
+    border-color: transparent;
+    font-weight: bold;
+    font-family: nyt-franklin, helvetica, arial, sans-serif;
+    height: 2rem;
+    margin: 0.1rem;
+    color: white;
+    border-radius: 0.25rem;
+    transition: 0.9s;
+}
+
+.color-button:hover{
+    background-color: #326891;
+}
+
+header{
+    border-bottom: thin solid rgb(177, 177, 177);
+    height: 3rem;
+    display: grid;
+    grid-template: 100% / 1fr auto 3fr auto 3fr auto 1fr;
+}
+
+header > *{
+    display: flex;
+    align-items: center;
+}
+
+header > img{
+    vertical-align: bottom;
+}
+
+header > :first-child{
+    grid-column: 2 / span 1;
+}
+
+header > :nth-child(2){
+    grid-column: 4 / span 1;
+}
+
+header > :last-child{
+    grid-column: 6 / span 1;
+}
