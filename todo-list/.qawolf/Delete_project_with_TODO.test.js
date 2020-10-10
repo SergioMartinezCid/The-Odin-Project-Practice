@@ -18,6 +18,9 @@ test("Delete_project_with_TODO", async () => {
   const page = await context.newPage();
   await page.goto("https://sergiomartinezcid.github.io/The-Odin-Project-Practice/todo-list/dist/index.html", { waitUntil: "domcontentloaded" });
   await page.click("#toggle-sidebar");
+  page.on('dialog', async dialog => {
+    await dialog.accept('test');
+  });
   await page.click('text="+ Project"');
   await page.click("text=test");
   await page.click("#toggle-sidebar");
