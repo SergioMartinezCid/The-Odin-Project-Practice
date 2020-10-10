@@ -73,3 +73,29 @@ header > :nth-child(2){
 header > :last-child{
     grid-column: 6 / span 1;
 }
+
+
+.align-image{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.align-image img{
+    width: 100%;
+}
+
+.img-caption{
+    margin-top: 0.5rem;
+    width: 80%;
+    color: rgb(141, 135, 135);
+    font-weight: 400;
+    font-size: 0.9375rem;
+}
+
+.img-caption-source{
+    color: rgb(136, 136, 136);
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+}
+
