@@ -5,7 +5,7 @@ html, body{
 }
 
 a{
-    text-decoration: underline;
+    color: rgb(50, 104, 145);
 }
 
 a:hover{
