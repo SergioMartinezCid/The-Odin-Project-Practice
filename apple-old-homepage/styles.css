@@ -1,0 +1,28 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+#main-content{
+    display: grid;
+    margin: 0 auto;
+    width: 90rem;
+    height: 46.25rem;
+    grid-template: 33.625rem 12.5rem / repeat(4, 22.75rem);
+}
+
+#main-content > *:first-child{
+    grid-column: 1 / span 4;
+}
+
+#contact-info{
+    margin: 1rem auto 2.6em;
+    width: 980px;
+    height: 53.9971px;
+}
+
