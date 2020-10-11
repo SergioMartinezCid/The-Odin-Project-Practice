@@ -108,6 +108,10 @@ header > :last-child{
     width: 37.5rem;
 }
 
+iframe.column-width{
+    height: 21.09375rem;
+}
+
 h1{
     font-family: nyt-cheltenham, georgia, "times new roman", times, serif;
     font-style: italic;
@@ -137,7 +141,7 @@ h1{
 
 .img-caption{
     margin-top: 0.5rem;
-    width: 80%;
+    width: 90%;
     color: rgb(141, 135, 135);
     font-weight: 400;
     font-size: 0.9375rem;
@@ -178,6 +182,9 @@ h1{
     width: 59.063rem;
 }
 
+#article-image03{
+    width: 45rem;
+}
 
 #grid-inflation{
     display: grid;
