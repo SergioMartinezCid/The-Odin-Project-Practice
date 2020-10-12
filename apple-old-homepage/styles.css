@@ -11,13 +11,34 @@ html, body{
 #main-content{
     display: grid;
     margin: 0 auto;
-    width: 90rem;
-    height: 46.25rem;
-    grid-template: 33.625rem 12.5rem / repeat(4, 22.75rem);
+    width: 91.375rem;
+    height: 51.3125rem;
+    grid-template: 38.8125rem 12.5rem / repeat(4, 1fr);
 }
 
 #main-content > *:first-child{
     grid-column: 1 / span 4;
+}
+
+#hero{
+    background-image: url('assets/your_verse_hero.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    background-size: 100% auto;
+}
+
+.img-promo{
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.img-promo:first-of-type{
+    margin-left: 0;
+}
+
+.img-promo:last-of-type{
+    margin-right: 0;
 }
 
 #contact-info{
