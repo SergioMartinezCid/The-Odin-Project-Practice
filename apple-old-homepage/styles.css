@@ -8,6 +8,19 @@ html, body{
     box-sizing: border-box;
 }
 
+a{
+    color: #08c;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
 #main-content{
     display: grid;
     margin: 0 auto;
@@ -25,6 +38,8 @@ html, body{
     background-repeat: no-repeat;
     background-position: 50% 100%;
     background-size: 100% auto;
+
+    color: white;
 }
 
 .img-promo{
@@ -43,7 +58,25 @@ html, body{
 
 #contact-info{
     margin: 1rem auto 2.6em;
-    width: 980px;
-    height: 53.9971px;
+    width: 61.25rem;
+    height: 5.625rem;
+
+    display: flex;
+    justify-content: space-around;
 }
 
+
+p{
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    color: #6e6e6e;
+    font-size: 0.62505rem;
+    line-height: 0.75rem;
+}
+
+.bottom-info{
+    margin-top: 0.937575rem;
+}
+
+p img{
+    vertical-align: middle;
+}
