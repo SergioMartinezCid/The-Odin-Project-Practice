@@ -47,7 +47,7 @@ a:hover{
 
 #gradient-bar{
     width: 61.25rem;
-    height: 2.25rem;
+    height: 2.375rem;
     margin-top: 5.1875rem;
     margin-bottom: 3.125rem;
 
@@ -90,13 +90,24 @@ a:hover{
     height: calc(2.25rem / 1.5);
 }
 
-.nav-item:last-of-type{
-    border-right: none;
-}
-
-.nav-item:last-of-type::after{
+.nav-item:last-child::after{
     width: 0;
     height: 0;
+}
+
+.search-bar{
+    flex: 0.2 0 auto;
+    width: 8.25rem;
+}
+
+.search-bar::before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 1.1875rem;
+    background-image: url('assets/search_field.png');
+    background-repeat: no-repeat;
+    background-position: center 100%;
 }
 
 #hero-title{
