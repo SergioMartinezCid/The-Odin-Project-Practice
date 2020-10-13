@@ -72,6 +72,11 @@ a:hover{
     font-size: 0.75rem;
 }
 
+.nav-item:hover{
+    background-color: rgba(0, 0, 0, 0.350);
+    box-shadow: inset rgba(255, 255, 255, 0.116) 0 0 0.390625rem 0.3125rem;
+}
+
 .nav-item::after{
     position: absolute;
     right: 0;
