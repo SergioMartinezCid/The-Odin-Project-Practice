@@ -107,7 +107,7 @@ a:hover{
     height: 1.1875rem;
     background-image: url('assets/search_field.png');
     background-repeat: no-repeat;
-    background-position: center 100%;
+    background-position: center 0%;
 }
 
 #hero-title{
