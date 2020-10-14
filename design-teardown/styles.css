@@ -103,11 +103,20 @@ h3.profile-photo{
     padding: 2rem 0 4rem;
 }
 
-
 #latest-articles > div{
     text-align: center;
     margin: auto;
     width: max-content;
     padding: 1rem;
+}
+
+#book-promotion{
+    height: 68.38875rem;
+    text-align: center;
+    padding-top: 3.5rem;
+}
+
+#book-promotion > *:nth-child(2){
+    height: 5.38125rem;
 }
 
