@@ -98,3 +98,16 @@ h3.profile-photo{
     width: 24.5125rem;
     height: 13.84375rem;
 }
+
+#latest-articles{
+    padding: 2rem 0 4rem;
+}
+
+
+#latest-articles > div{
+    text-align: center;
+    margin: auto;
+    width: max-content;
+    padding: 1rem;
+}
+
