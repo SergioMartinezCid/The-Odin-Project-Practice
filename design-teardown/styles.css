@@ -10,9 +10,8 @@ html, body{
 
 .relevance-1{ background-color: rgb(240, 240, 240);}
 .relevance-2{ background-color: rgb(185, 185, 185);}
-.relevance-3{ background-color: rgb(130, 130, 130);}
-.relevance-4{ background-color: rgb(75, 75, 75);}
-.relevance-1, .relevance-2, .relevance-3, .relevance-4{ color: white; }
+.relevance-3{ background-color: rgb(130, 130, 130); color: white;}
+.relevance-4{ background-color: rgb(75, 75, 75); color: white;}
 
 #nav-bar{
     height: 6.78125rem;
@@ -27,6 +26,21 @@ html, body{
 .half-width{
     width: 50%;
     height: 47.91875rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 10rem 2rem 2rem;
+}
+
+.quarter-width{
+    width: 25%;
+    height: 39.05rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
 }
 
 .profile-photo{
@@ -39,14 +53,7 @@ h3.profile-photo{
     display: inline;
 }
 
-.article{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem 10rem 2rem 2rem;
-}
-
-.article *{
+.half-width *, .quarter-width *, #floating-title *{
     text-transform: capitalize;
 }
 
@@ -64,4 +71,9 @@ h3.profile-photo{
     font-size: 1.875rem;
     font-family: Mija;
     font-feature-settings: "onum";
+}
+
+.ad-square{
+    width: 24.5125rem;
+    height: 13.84375rem;
 }
