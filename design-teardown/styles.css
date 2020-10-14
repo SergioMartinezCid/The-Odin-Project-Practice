@@ -103,11 +103,11 @@ h3.profile-photo{
     height: 13.84375rem;
 }
 
-#latest-articles{
+.lone-link{
     padding: 2rem 0 4rem;
 }
 
-#latest-articles > div{
+.lone-link > div{
     text-align: center;
     margin: auto;
     width: max-content;
