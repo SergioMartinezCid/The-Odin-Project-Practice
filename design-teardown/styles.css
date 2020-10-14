@@ -33,6 +33,10 @@ html, body{
     height: 39.05rem;
 }
 
+.shorter-height{
+    height: 40.125rem;
+}
+
 .half-width{
     flex: 2 2 50%;
     display: flex;
@@ -120,3 +124,35 @@ h3.profile-photo{
     height: 5.38125rem;
 }
 
+#person-of-the-week{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+#person-of-the-week > *, .person > *{
+    margin: 0.7rem;
+}
+
+#person-of-the-week > .profile-photo{
+    width: 15.125rem;
+    height: 16.125rem;
+}
+
+#person-of-the-week > *:last-child{
+    display: inline-block;
+    font-size: calc(.35842vw + .95296em);
+    width: calc(100% - 17rem);
+}
+
+.person{
+    height: 23.85rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.person > *:last-child{
+    display: inline-block;
+    font-size: 1rem;
+    width: calc(100% - 7rem);
+}
