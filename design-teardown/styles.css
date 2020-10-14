@@ -13,6 +13,7 @@ html, body{
 .relevance-3{ background-color: rgb(130, 130, 130); color: white;}
 .relevance-4{ background-color: rgb(75, 75, 75); color: white;}
 
+
 #nav-bar{
     height: 6.78125rem;
 }
@@ -21,12 +22,19 @@ html, body{
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    align-content: stretch;
+}
+
+.long-height{
+    height: 47.91875rem;
+}
+
+.short-height{
+    height: 39.05rem;
 }
 
 .half-width{
-    width: 50%;
-    height: 47.91875rem;
-
+    flex: 2 2 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,13 +42,26 @@ html, body{
 }
 
 .quarter-width{
-    width: 25%;
-    height: 39.05rem;
-
+    flex: 1 1 25%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 2rem;
+}
+
+.posts-with-red-box{
+    margin: 1rem;
+}
+
+.posts-with-red-box .half-width{
+    padding-top: 5rem;
+}
+
+.button-simulated{
+    height: 3.5rem;
+    width: max-content;
+    padding: 1rem 0.5rem;
+    margin: 3rem auto 0 auto;
 }
 
 .profile-photo{
