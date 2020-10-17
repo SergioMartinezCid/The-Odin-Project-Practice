@@ -8,8 +8,110 @@ html, body{
     min-height: 100vh;
 }
 
-@media only screen and (max-width: 1000px){
+#nav{
+    position: relative;
+    height: 80px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 32px 0px;
 }
 
-@media only screen and (max-width: 750px){
+#logo{
+    width: 106px;
+    height: 80px;
+    position: absolute;
+    left: 0;
+    background-color: black;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo > img{
+    height: 16px;
+}
+
+.space-between{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#nav ul{
+    margin: 0;
+    padding-left: 0.625rem;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#nav li{
+    display: inline;
+    margin: 0 0.4rem;
+}
+
+#nav-top{
+    height: 32px;
+    color: rgb(85, 85, 85);
+    background-color: black;
+    font-size: 0.8125rem;
+}
+
+#nav-bottom{
+    height: 48px;
+    color: rgb(170, 170, 170);
+    background-color: white;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+}
+
+.icon-box{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    width: 50px;
+    height: 48px;
+    cursor: pointer;
+}
+
+#mobile-hamburger{
+    display: none;
+}
+
+@media only screen and (max-width: 1000px){
+    #nav{
+        padding-left: 106px;
+    }
+
+    #logo{
+        visibility: visible;
+        display: inline-flex;
+    }
+}
+
+@media only screen and (max-width: 831px){
+    #mobile-hamburger{
+        visibility: visible;
+        display: inline-block;
+    }
+
+    #nav{
+        height: 48px;
+    }
+
+    #logo{
+        height: 48px;
+    }
+
+    #nav-top{
+        display: none;
+    }
+
+    #nav-bottom .nav-left{
+        display: none;
+    }
+
+    #nav-bottom{
+        justify-content: flex-end;
+    }
 }
