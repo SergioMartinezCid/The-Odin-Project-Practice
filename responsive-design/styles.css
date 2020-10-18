@@ -82,20 +82,6 @@ html, body{
     display: none;
 }
 
-@media only screen and (max-width: 1000px){
-
-    /* HEADER */
-
-    #nav{
-        padding-left: 106px;
-    }
-
-    #logo{
-        visibility: visible;
-        display: inline-flex;
-    }
-}
-
 /* MAIN ARTICLES */
 
 #main-articles{
@@ -133,6 +119,81 @@ html, body{
     background-size: cover;
 }
 
+/* LATEST (BODY) */
+
+#latest-body{
+    margin-top: 3rem;
+}
+
+#latest-body-wrapper{
+    max-width: 74.5rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.section-title{
+    color: rgb(255, 68, 34);
+    cursor: pointer;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.section-title::after{
+    content: ' >';
+    display: inline;
+}
+
+/* LATEST NEWS */
+
+#latest-news{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.story{
+    flex-basis: 25%;
+    max-width: 25%;
+    padding: 0.5rem;
+}
+
+.story > img{
+    width: 100%;
+}
+
+.story > div{
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: ARS Maquette, Helvetica Neue, Arial, sans-serif;
+}
+
+.story > div > div{
+    font-size: 0.8125rem;
+    color: rgb(170, 170, 170);
+}
+
+@media only screen and (max-width: 1200px){
+
+    /* HEADER */
+
+    #nav{
+        padding-left: 106px;
+    }
+
+    #logo{
+        visibility: visible;
+        display: inline-flex;
+    }
+
+    .story{
+        flex-basis: 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
 @media only screen and (max-width: 831px){
 
     /* HEADER */
@@ -166,6 +227,7 @@ html, body{
 
     #main-articles{
         width: 100%;
+        height: auto;
         display: flex;
         flex-direction: column;
         color: white;
@@ -185,5 +247,33 @@ html, body{
 
     .article{
         height: 7.95625rem;
+    }
+
+    #latest-news{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .story{
+        max-width: 100%;
+    }
+
+    .story > img{
+        width: 75px;
+        height: 75px;
+        object-fit: cover;
+        float: left;
+    }
+
+    .story > div{
+        font-size: 0.875rem;
+        margin: 0.5rem;
+        display: inline;
+    }
+
+    .story > div > div{
+        font-size: 0.75rem;
+        display: inline-block;
+        margin: 0.5rem;
     }
 }
