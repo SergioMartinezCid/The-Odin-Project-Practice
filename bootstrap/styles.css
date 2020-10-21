@@ -1,3 +1,7 @@
+*{
+    font-family: "Roboto Condensed",sans-serif;
+}
+
 body{
     background-color: #f4f5f6;
 }
@@ -29,4 +33,46 @@ body .navbar{
 #nav-top{
     width: 100%;
     height: 95px;
+}
+
+#nav-bottom{
+    background-color: white;
+    padding: 0.9rem 0.2rem;
+}
+
+#nav-bottom li{
+    display: inline;
+}
+
+#nav-bottom a{
+    color:black;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 1rem;
+    font-size: 1.1875rem;
+}
+
+#nav-bottom a:hover{
+    color: #f72210;
+}
+
+#nav-links-nw li{
+    border-left: 1px solid #d9d9d9;
+}
+
+#nav-links-nw > li:first-of-type{
+    border-left-width: 0;
+}
+
+#nav-links-nw a{
+    font-weight: 700;
+}
+
+#nav-trending > li:first-child > a:first-child{
+    font-weight: 700;
+}
+
+#nav-links-nw input{
+    width: 3.75rem;
+    border-width: 0;
 }
