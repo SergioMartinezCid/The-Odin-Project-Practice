@@ -81,10 +81,22 @@ body .navbar{
     max-width: 81.875rem;
 }
 
+.featured-story img{
+    width: 342px;
+    height: 228.6px;
+    object-fit: cover;
+}
+
 .top-story{
     width: 506px;
     height: 311px;
     object-fit: cover;
+}
+
+.my-turn{
+    width: 155.38px;
+    height: 155.38px;
+
 }
 
 .hidden-md{
