@@ -1,0 +1,43 @@
+
+/**
+ * Inspired by https://trungdq88.github.io/960-grid-generator/, implemented using grids
+ */
+
+$col_count: 12; 
+$col_width: 100vw * 3 / (4 * $col_count);
+$col_space: 100vw * 1 / (4 * $col_count);
+
+.container_#{$col_count}{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    .row{
+        margin: 10px 0;
+        min-height: 20px;
+        width: 100%;
+    }
+}
+
+.row{
+    display: grid;
+    grid-template: 1fr / repeat($col_count, $col_width);
+    gap: $col_space;
+    padding-left: $col_space / 2;
+    padding-right: $col_space / 2;
+}
+
+@for $i from 1 to $col_count{
+    .from_#{$i}{
+        grid-column-start: $i;
+    }
+
+    .to_#{$i}{
+        grid-column-end: #{$i + 1};
+    }
+}
+

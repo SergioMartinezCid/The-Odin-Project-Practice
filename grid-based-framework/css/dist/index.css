@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+/**
+ * Inspired by https://trungdq88.github.io/960-grid-generator/, implemented using grids
+ */
+.container_12 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.container_12 .row {
+  margin: 10px 0;
+  min-height: 20px;
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template: 1fr/repeat(12, 6.25vw);
+  gap: 2.0833333333vw;
+  padding-left: 1.0416666667vw;
+  padding-right: 1.0416666667vw;
+}
+
+.from_1 {
+  grid-column-start: 1;
+}
+
+.to_1 {
+  grid-column-end: 2;
+}
+
+.from_2 {
+  grid-column-start: 2;
+}
+
+.to_2 {
+  grid-column-end: 3;
+}
+
+.from_3 {
+  grid-column-start: 3;
+}
+
+.to_3 {
+  grid-column-end: 4;
+}
+
+.from_4 {
+  grid-column-start: 4;
+}
+
+.to_4 {
+  grid-column-end: 5;
+}
+
+.from_5 {
+  grid-column-start: 5;
+}
+
+.to_5 {
+  grid-column-end: 6;
+}
+
+.from_6 {
+  grid-column-start: 6;
+}
+
+.to_6 {
+  grid-column-end: 7;
+}
+
+.from_7 {
+  grid-column-start: 7;
+}
+
+.to_7 {
+  grid-column-end: 8;
+}
+
+.from_8 {
+  grid-column-start: 8;
+}
+
+.to_8 {
+  grid-column-end: 9;
+}
+
+.from_9 {
+  grid-column-start: 9;
+}
+
+.to_9 {
+  grid-column-end: 10;
+}
+
+.from_10 {
+  grid-column-start: 10;
+}
+
+.to_10 {
+  grid-column-end: 11;
+}
+
+.from_11 {
+  grid-column-start: 11;
+}
+
+.to_11 {
+  grid-column-end: 12;
+}
