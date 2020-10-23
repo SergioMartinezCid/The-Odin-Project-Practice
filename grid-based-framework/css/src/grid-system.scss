@@ -18,7 +18,6 @@ $col_space: 100vw * 1 / (4 * $col_count);
 
     .row{
         margin: 10px 0;
-        min-height: 20px;
         width: 100%;
     }
 }
@@ -29,6 +28,10 @@ $col_space: 100vw * 1 / (4 * $col_count);
     gap: $col_space;
     padding-left: $col_space / 2;
     padding-right: $col_space / 2;
+
+    *{
+        height: 100%;
+    }
 }
 
 @for $i from 1 to $col_count{
@@ -38,6 +41,12 @@ $col_space: 100vw * 1 / (4 * $col_count);
 
     .to_#{$i}{
         grid-column-end: #{$i + 1};
+    }
+}
+
+@for $i from 1 to 20{
+    .height_#{5 * $i}{
+        height: #{5 * $i}vh;
     }
 }
 
