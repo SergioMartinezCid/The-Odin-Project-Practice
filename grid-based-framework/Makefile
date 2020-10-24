@@ -1,4 +1,5 @@
 DIST_CSS := css/dist/index.css
+
 css: css/src/index.scss
 	sass $< ${DIST_CSS} --no-source-map
 
