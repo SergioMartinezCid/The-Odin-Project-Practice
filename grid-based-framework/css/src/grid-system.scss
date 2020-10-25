@@ -46,10 +46,3 @@ $col_space: 100vw * 1 / (4 * $col_count);
         grid-column-end: #{$i + 1};
     }
 }
-
-@for $i from 1 to 1000{
-    .height_#{floor($i / 10)}_#{$i - 10 * floor($i / 10)}{
-        height: #{$i/10}vh;
-    }
-}
-
