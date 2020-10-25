@@ -11,6 +11,11 @@ $secondary-brown: #cc9543;
     margin-bottom: 3.125rem;
 }
 
+#logo{
+    display: flex;
+    flex-direction: row;
+}
+
 #logo-image{
     width: 3.29375rem;
     height: 4.375rem;
@@ -22,24 +27,43 @@ $secondary-brown: #cc9543;
     font-family: "Norse";
     letter-spacing: 0.4px;
     font-weight: bold;
-    font-size: 1.6em;
-    display: inline-block;
-    padding-left: 0.5em;
+    font-size: 2rem;
+
+    padding-bottom: 1.9rem;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #navbar{
     text-align: right;
     margin-right: 1rem;
-    padding: auto;
+    padding-top: 1.9rem;
 }
 
 #navbar > *{
     color: rgba(74, 74, 74, 0.7);
     text-decoration: none;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0.6rem;
 }
 
 #navbar > a:hover{
     color: #000;
+}
+
+.dropdown-toggle::after {
+	display: inline-block;
+	margin-left: 0.255em;
+	vertical-align: 0.255em;
+	content: "";
+	border-top: 0.3em solid;
+	border-right: 0.3em solid transparent;
+	border-bottom: 0;
+	border-left: 0.3em solid transparent;
 }
 
 #hero-gradient{
@@ -48,14 +72,29 @@ $secondary-brown: #cc9543;
 
 #title{
     text-align: center;
-    height: 2.7rem;
-    padding-bottom: 1.875rem;
+    min-height: 2.7rem;
+}
+
+#title > h1{
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $secondary-brown;
+    font-size: 2.25rem;
+    font-weight: 300;
+    letter-spacing: 0.4px;
 }
 
 #subtitle{
     text-align: center;
-    height: 2.1145625rem;
+    min-height: 2.1145625rem;
     padding-bottom: 4.375rem;
+}
+
+#subtitle > h1{
+    color: rgba(74,74,74,0.7);
+    font-size: 1.125rem;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #call_for_action{
@@ -67,4 +106,20 @@ $secondary-brown: #cc9543;
     width: 17.6125rem;
     height: 3.5rem;
     background-color: $button-color;
+
+    box-shadow: 0 0.05em 0.25em 0 rgba(0,0,0,0.5);
+    border: none;
+    border-radius: 0.2em;
+
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    text-align: center;
+}
+
+#call_for_action:hover {
+    opacity: 0.8;
+    color: #fff;
+    text-decoration: none;
 }
