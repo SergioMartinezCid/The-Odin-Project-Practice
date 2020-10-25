@@ -11,7 +11,6 @@ $col_space: 100vw * 1 / (4 * $col_count);
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    overflow: hidden;
 
     display: flex;
     flex-direction: column;
@@ -34,7 +33,11 @@ $col_space: 100vw * 1 / (4 * $col_count);
     }
 }
 
-@for $i from 1 to $col_count{
+.row:last-of-type{
+    margin-bottom: 0;
+}
+
+@for $i from 1 to $col_count + 1{
     .from_#{$i}{
         grid-column-start: $i;
     }
