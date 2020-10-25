@@ -4122,6 +4122,15 @@ html, body {
   height: 99.9vh;
 }
 
+@font-face {
+  font-family: "Norse";
+  src: url("../../assets/Norse-Bold.otf");
+}
+#logo-image {
+  width: 3.29375rem;
+  height: 4.375rem;
+}
+
 #logo-text {
   color: #cc9543;
   text-transform: uppercase;
@@ -4131,4 +4140,19 @@ html, body {
   font-size: 1.6em;
   display: inline-block;
   padding-left: 0.5em;
+}
+
+#navbar {
+  text-align: right;
+  margin-right: 1rem;
+  padding: auto;
+}
+
+#navbar > * {
+  color: rgba(74, 74, 74, 0.7);
+  text-decoration: none;
+}
+
+#navbar > a:hover {
+  color: #000;
 }
