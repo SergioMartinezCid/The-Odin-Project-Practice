@@ -3,13 +3,21 @@
     src: url("../../assets/Norse-Bold.otf");
 }
 
+$button-color: #6abfc3;
+$secondary-brown: #cc9543;
+
+#header{
+    height: 5.875rem;
+    margin-bottom: 3.125rem;
+}
+
 #logo-image{
     width: 3.29375rem;
     height: 4.375rem;
 }
 
 #logo-text{
-    color: #cc9543;
+    color: $secondary-brown;
     text-transform: uppercase;
     font-family: "Norse";
     letter-spacing: 0.4px;
@@ -32,4 +40,31 @@
 
 #navbar > a:hover{
     color: #000;
+}
+
+#hero-gradient{
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(238, 238, 238));
+}
+
+#title{
+    text-align: center;
+    height: 2.7rem;
+    padding-bottom: 1.875rem;
+}
+
+#subtitle{
+    text-align: center;
+    height: 2.1145625rem;
+    padding-bottom: 4.375rem;
+}
+
+#call_for_action{
+    text-align: center;
+    margin-bottom: 3.75rem;
+}
+
+#call_for_action > button{
+    width: 17.6125rem;
+    height: 3.5rem;
+    background-color: $button-color;
 }
