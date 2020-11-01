@@ -9,4 +9,4 @@ block content
     div
       h4 #{message.text}
       p 
-        small #{message.user} (#{message.added.toLocaleDateString('en-UK')})
+        small #{message.user} (#{`${message.added.getDate()}-${message.added.getMonth()}-${message.added.getFullYear()}`})
