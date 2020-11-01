@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div
+    h1= title
+    a(href="/new")
+      button Add new message
+  each message in messages
+    div
+      h4 #{message.text}
+      p 
+        small #{message.user} (#{message.added.toLocaleDateString('en-US')})

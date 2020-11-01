@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  form(method="POST", action="/new")
+    div
+      input(type="text" name="author" placeholder="Author")
+    div
+      input(type="text" name="message" placeholder="Message")
+    input(type="submit", value="Send message")
