@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var http = require('http');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -10,14 +11,14 @@ var catalogRouter = require('./routes/catalog');
 
 var app = express();
 
-//Set up mongoose connection
-var mongoose = require('mongoose');
-// var mongoDB = `mongodb+srv://admin:${process.env.ADMIN_PASSWD}@cluster0.pvgbx.mongodb.net/local_library?retryWrites=true&w=majority`;
-var mongoDB = `mongodb+srv://ll_user:${process.env.ADMIN_PASSWD}@cluster0.pvgbx.mongodb.net/local_library?retryWrites=true&w=majority`;
-console.log(mongoDB);
-mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// Set up postgres connection
+var db = require('./models');
+app.set('port', process.env.PORT || 3000);
+db.sequelize.sync().then(function() {
+  http.createServer(app).listen(app.get('port')+1, function(){
+    console.log('Express server listening on port ' + app.get('port'));
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
