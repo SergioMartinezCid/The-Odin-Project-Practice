@@ -1,11 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define("Book", {
+        id: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         summary: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
         isbn: {
@@ -13,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         },
         url: {
-            type: DataTypes.VIRTUAL,
+            type: DataTypes.VIRTUAL(),
             get() {
-                return `/catalog/book/${this.firstName}`;
+                return `/catalog/book/${this.id}`;
               },
               set(value) {
                 throw new Error('Do not try to set the `url` value!');

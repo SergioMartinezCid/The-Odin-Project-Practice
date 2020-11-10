@@ -24,8 +24,12 @@ module.exports = (sequelize, DataTypes) => {
         lifespan: {
           type: DataTypes.VIRTUAL,
           get(){
-            return (new Date(this.date_of_death.format('DD/MM/YYYY h:mm:ss'))
-              - new Date(this.date_of_birth.format('DD/MM/YYYY h:mm:ss')));
+            if (this.date_of_birth != null && this.date_of_death != null){
+              return (new Date(this.date_of_death.format('DD/MM/YYYY h:mm:ss'))
+                - new Date(this.date_of_birth.format('DD/MM/YYYY h:mm:ss')));
+            } else {
+              return 'Unknown';
+            }
           },
           set(value){
             throw new Error('Do not try to set the `lifespan` value!');

@@ -15,7 +15,7 @@ if (!global.hasOwnProperty('db')) {
         dialectOptions: {
           ssl: {
             require: true,
-            rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+            rejectUnauthorized: false
           }
         }
       })
@@ -32,9 +32,14 @@ if (!global.hasOwnProperty('db')) {
       Genre:      genre(sequelize, Sequelize.DataTypes)
     }
   
-    global.db.Book.hasOne(global.db.Author);
-    global.db.Book.hasOne(global.db.Genre);
-    global.db.BookInstance.hasOne(global.db.Book);
+    global.db.Author.hasOne(global.db.Book);
+    global.db.Book.belongsTo(global.db.Author);
+
+    global.db.Genre.hasOne(global.db.Book);
+    global.db.Book.belongsTo(global.db.Genre);
+
+    global.db.Book.hasOne(global.db.BookInstance);
+    global.db.BookInstance.belongsTo(global.db.Book);
   }
   
   module.exports = global.db

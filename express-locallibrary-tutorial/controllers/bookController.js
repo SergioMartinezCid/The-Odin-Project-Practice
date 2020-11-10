@@ -1,12 +1,38 @@
-var Book = require('../models/book');
+var db = require('../models');
 
-exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: Site Home Page');
+exports.index = async function(req, res) {   
+    let err = false;
+    let book_count, book_instance_count, book_instance_available_count,
+        author_count, genre_count;
+    try {
+        /*
+        const [book_count, book_instance_count, book_instance_available_count, author_count, genre_count] = 
+            await Promise.all([db.Book.count(), db.BookInstance.count(), 
+                db.BookInstance.count({ where: [{'status': 'Available'}]}), db.Author.count(), db.Genre.count()]);
+        */
+       book_count = await db.Book.count();
+       book_instance_count = await db.BookInstance.count();
+       book_instance_available_count = await db.BookInstance.count({ where: [{'status': 'Available'}]});
+       author_count = await db.Author.count();
+       genre_count = await db.Genre.count();
+    } catch (error) {
+        err = true;
+    }
+    res.render('index', { title: 'Local Library Home', error: err, data: {
+        book_count, book_instance_count, book_instance_available_count, author_count, genre_count
+    } });
 };
 
 // Display list of all books.
-exports.book_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book list');
+exports.book_list = async function(req, res, next) {
+    var list_books = await db.Book.findAll({
+        attributes: ['title'],
+        include: [{
+            model: db.Author,
+            required: true
+        }]
+    });
+    res.render('book_list', { title: 'Book List', book_list: list_books });
 };
 
 // Display detail page for a specific book.
