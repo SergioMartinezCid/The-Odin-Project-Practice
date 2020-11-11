@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define("Genre", {
+        id: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -8,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         url: {
             type: DataTypes.VIRTUAL,
             get() {
-                return `/catalog/genre/${this.firstName}`;
+                return `/catalog/genre/${this.id}`;
             }
         }
     });

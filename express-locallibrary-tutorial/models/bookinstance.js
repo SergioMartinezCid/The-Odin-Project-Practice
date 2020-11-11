@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true,
           primaryKey: true
         },
+        id: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true
+        },
         imprint: {
             type: DataTypes.STRING,
             allowNull: false,

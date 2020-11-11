@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         },
         url: {
-            type: DataTypes.VIRTUAL(),
+            type: DataTypes.VIRTUAL,
             get() {
                 return `/catalog/book/${this.id}`;
               }

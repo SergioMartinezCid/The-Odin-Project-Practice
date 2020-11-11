@@ -2,6 +2,11 @@ const { DateTime } = require("luxon");
 
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define("Author", {
+        id: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true
+        },
         first_name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -54,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         url: {
             type: DataTypes.VIRTUAL,
             get() {
-                return `/catalog/author/${this.firstName}`;
+                return `/catalog/author/${this.id}`;
               }
         }
     });
