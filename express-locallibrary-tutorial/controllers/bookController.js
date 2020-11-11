@@ -1,5 +1,3 @@
-var db = require('../models');
-
 exports.index = async function(req, res) {   
     let err = false;
     let book_count, book_instance_count, book_instance_available_count,
@@ -31,8 +29,30 @@ exports.book_list = async function(req, res, next) {
 };
 
 // Display detail page for a specific book.
-exports.book_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
+exports.book_detail = async function(req, res, next) {
+    try {
+        const book = await db.Book.findOne({
+            where: {
+                id: parseInt(req.params.id)
+            },
+            include: [db.Author, db.Genre]
+        });
+        const book_instances = await db.BookInstance.findAll({
+            where: {
+                BookId: parseInt(req.params.id)
+            }
+        });
+
+        if (book == null){
+            var err = new Error('Book not found');
+            err.status = 404;
+            return next(err);
+        }
+        
+        res.render('book_detail', { title: 'Book Detail', book: book, book_instances: book_instances } );
+    } catch (err) {
+        return next(err);
+    }
 };
 
 // Display book create form on GET.
