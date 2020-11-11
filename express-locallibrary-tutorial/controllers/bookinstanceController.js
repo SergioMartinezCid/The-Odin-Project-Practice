@@ -8,7 +8,6 @@ exports.bookinstance_list = async function(req, res) {
             required: true
         }]
     });
-    console.log(list_bookinstances[0].due_date_formatted);
     res.render('bookinstance_list', { title: 'Book Instance List', bookinstance_list: list_bookinstances });
 };
 

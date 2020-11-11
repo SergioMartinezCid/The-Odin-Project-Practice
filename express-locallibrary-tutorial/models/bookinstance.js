@@ -32,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
         due_back_formatted: {
           type: DataTypes.VIRTUAL,
           get() {
-            console.log(this.due_back);
             return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
           },
           set(value) {
