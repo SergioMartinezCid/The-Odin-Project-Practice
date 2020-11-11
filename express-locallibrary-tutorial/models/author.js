@@ -1,3 +1,5 @@
+const { DateTime } = require("luxon");
+
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define("Author", {
         first_name: {
@@ -16,9 +18,26 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.VIRTUAL,
           get(){
             return `${this.family_name}, ${this.first_name}`;
-          },
-          set(value){
-            throw new Error('Do not try to set the `name` value!');
+          }
+        },
+        date_of_birth_formatted: {
+          type: DataTypes.VIRTUAL,
+          get(){
+            if (this.date_of_birth != null){
+              return DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED);
+            } else {
+              return '';
+            }
+          }
+        },
+        date_of_death_formatted: {
+          type: DataTypes.VIRTUAL,
+          get(){
+            if (this.date_of_death != null){
+              return DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED);
+            } else {
+              return '';
+            }
           }
         },
         lifespan: {
