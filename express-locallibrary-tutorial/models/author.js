@@ -30,18 +30,12 @@ module.exports = (sequelize, DataTypes) => {
             } else {
               return 'Unknown';
             }
-          },
-          set(value){
-            throw new Error('Do not try to set the `lifespan` value!');
           }
         },
         url: {
             type: DataTypes.VIRTUAL,
             get() {
                 return `/catalog/author/${this.firstName}`;
-              },
-              set(value) {
-                throw new Error('Do not try to set the `url` value!');
               }
         }
     });

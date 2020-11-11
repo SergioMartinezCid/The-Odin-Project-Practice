@@ -24,18 +24,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.VIRTUAL,
             get() {
                 return `/catalog/book/${this.id}`;
-              },
-              set(value) {
-                throw new Error('Do not try to set the `url` value!');
               }
         },
         due_back_formatted: {
           type: DataTypes.VIRTUAL,
           get() {
             return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
-          },
-          set(value) {
-            throw new Error('Do not try to set the `due_back_formatted` value!');
           }
         }
     });

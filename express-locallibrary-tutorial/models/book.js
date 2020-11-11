@@ -21,9 +21,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.VIRTUAL(),
             get() {
                 return `/catalog/book/${this.id}`;
-              },
-              set(value) {
-                throw new Error('Do not try to set the `url` value!');
               }
         }
     });
