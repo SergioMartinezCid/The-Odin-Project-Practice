@@ -21,7 +21,7 @@ exports.index = async function(req, res) {
 // Display list of all books.
 exports.book_list = async function(req, res, next) {
     var list_books = await db.Book.findAll({
-        attributes: ['title'],
+        attributes: ['id', 'title'],
         include: [{
             model: db.Author,
             required: true
