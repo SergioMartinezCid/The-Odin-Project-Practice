@@ -1,5 +1,3 @@
-var Genre = require('../models/genre');
-
 // Display list of all Genre.
 exports.genre_list = async function(req, res) {
     var list_genres = await db.Genre.findAll({

@@ -1,5 +1,3 @@
-var BookInstance = require('../models/bookinstance');
-
 // Display list of all BookInstances.
 exports.bookinstance_list = async function(req, res) {
     var list_bookinstances = await db.BookInstance.findAll({

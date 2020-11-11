@@ -1,5 +1,3 @@
-var Author = require('../models/author');
-
 // Display list of all Authors.
 exports.author_list = async function(req, res) {
     var list_authors = await db.Author.findAll({
