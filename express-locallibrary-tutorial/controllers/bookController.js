@@ -5,11 +5,6 @@ exports.index = async function(req, res) {
     let book_count, book_instance_count, book_instance_available_count,
         author_count, genre_count;
     try {
-        /*
-        const [book_count, book_instance_count, book_instance_available_count, author_count, genre_count] = 
-            await Promise.all([db.Book.count(), db.BookInstance.count(), 
-                db.BookInstance.count({ where: [{'status': 'Available'}]}), db.Author.count(), db.Genre.count()]);
-        */
        book_count = await db.Book.count();
        book_instance_count = await db.BookInstance.count();
        book_instance_available_count = await db.BookInstance.count({ where: [{'status': 'Available'}]});
