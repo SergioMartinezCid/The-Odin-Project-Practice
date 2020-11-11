@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         url: {
             type: DataTypes.VIRTUAL,
             get() {
-                return `/catalog/book/${this.id}`;
+                return `/catalog/bookinstance/${this.id}`;
               }
         },
         due_back_formatted: {
