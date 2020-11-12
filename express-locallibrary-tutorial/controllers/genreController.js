@@ -60,13 +60,11 @@ exports.genre_create_post = [
             // Data from form is valid.
             // Check if Genre with same name already exists.
             try {
-                console.log(req.body.name);
                 const found_genre = await db.Genre.findOne({
                     where: {
                         'name': req.body.name
                     }
                 });
-                console.log(found_genre);
                 if (found_genre) {
                     res.redirect(found_genre.url);
                 } else {
