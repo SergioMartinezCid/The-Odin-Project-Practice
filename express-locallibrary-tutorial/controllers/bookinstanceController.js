@@ -1,3 +1,5 @@
+const { body,validationResult } = require('express-validator');
+
 // Display list of all BookInstances.
 exports.bookinstance_list = async function(req, res) {
     var list_bookinstances = await db.BookInstance.findAll({
@@ -32,14 +34,69 @@ exports.bookinstance_detail = async function(req, res, next) {
 };
 
 // Display BookInstance create form on GET.
-exports.bookinstance_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance create GET');
+exports.bookinstance_create_get = async function(req, res) {
+    try {
+        const books = await db.Book.findAll({
+            attributes: ['title']
+        });
+        res.render('bookinstance_form', { title: 'Create BookInstance', book_list: books });
+    } catch (err) {
+        return next(err);
+    }
 };
 
 // Handle BookInstance create on POST.
-exports.bookinstance_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance create POST');
-};
+exports.bookinstance_create_post = [
+
+    // Validate and sanitise fields.
+    body('book', 'Book must be specified').trim().isLength({ min: 1 }).escape(),
+    body('imprint', 'Imprint must be specified').trim().isLength({ min: 1 }).escape(),
+    body('status').escape(),
+    body('due_back', 'Invalid date').optional({ checkFalsy: true }).isISO8601().toDate(),
+    
+    // Process request after validation and sanitization.
+    async (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        const book = await db.Book.findOne({
+            where: {
+                title: req.body.book
+            }
+        });
+
+        // Create a BookInstance object with escaped and trimmed data.
+        const bookinstance = await db.BookInstance.build({
+            BookId: book.id,
+            imprint: req.body.imprint,
+            status: req.body.status,
+            due_back: req.body.due_back
+        });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values and error messages.
+            try {
+                const books = await db.Book.findAll({
+                    attributes: ['title']
+                });
+                res.render('bookinstance_form', { title: 'Create BookInstance', book_list: books, selected_book: bookinstance.Book.id, errors: errors.array(), bookinstance: bookinstance });
+                return;
+            } catch (err) {
+                return next(err);
+            }
+        }
+        else {
+            // Data from form is valid.
+            try {
+                await bookinstance.save();
+                res.redirect(bookinstance.url);
+            } catch (err) {
+                return next(err);
+            }
+        }
+    }
+];
 
 // Display BookInstance delete form on GET.
 exports.bookinstance_delete_get = function(req, res) {
