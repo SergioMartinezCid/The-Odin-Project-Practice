@@ -48,12 +48,20 @@ module.exports = (sequelize, DataTypes) => {
         lifespan: {
           type: DataTypes.VIRTUAL,
           get(){
-            if (this.date_of_birth != null && this.date_of_death != null){
-              return (new Date(this.date_of_death.format('DD/MM/YYYY h:mm:ss'))
-                - new Date(this.date_of_birth.format('DD/MM/YYYY h:mm:ss')));
+            let lifespan_start, lifespan_end;
+            if (this.date_of_death == null){
+              lifespan_end = '';
             } else {
-              return 'Unknown';
+              lifespan_end = DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED);
             }
+
+            if (this.date_of_birth == null){
+              lifespan_start = '';
+            } else {
+              lifespan_start = DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED);
+            }
+
+            return `${lifespan_start} - ${lifespan_end}`;
           }
         },
         url: {
