@@ -10,8 +10,25 @@ exports.bookinstance_list = async function(req, res) {
 };
 
 // Display detail page for a specific BookInstance.
-exports.bookinstance_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance detail: ' + req.params.id);
+exports.bookinstance_detail = async function(req, res, next) {
+       try {
+        const bookinstance = await db.BookInstance.findOne({
+            where: {
+                id: parseInt(req.params.id)
+            },
+            include: [db.Book]
+        });
+
+        if (bookinstance == null){
+            var err = new Error('Book Instance not found');
+            err.status = 404;
+            return next(err);
+        }
+        
+        res.render('bookinstance_detail', { title: `Copy: ${bookinstance.Book.title}`, bookinstance: bookinstance } );
+    } catch (err) {
+        return next(err);
+    } 
 };
 
 // Display BookInstance create form on GET.
