@@ -21,8 +21,9 @@
     "mysql": "^2.18.1",
     "pg": "^8.4.2",
     "pg-hstore": "^2.3.3",
-    "pug": "2.0.0-beta11",
-    "sequelize": "^6.3.5"
+    "pug": "^2.0.4",
+    "sequelize": "^6.3.5",
+    "sequelize-cursor-pagination": "^1.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

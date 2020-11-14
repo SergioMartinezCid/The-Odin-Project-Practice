@@ -29,7 +29,8 @@ if (!global.hasOwnProperty('db')) {
       Author:      author(sequelize, Sequelize.DataTypes),
       Book:      book(sequelize, Sequelize.DataTypes),
       BookInstance:      bookinstance(sequelize, Sequelize.DataTypes),
-      Genre:      genre(sequelize, Sequelize.DataTypes)
+      Genre:      genre(sequelize, Sequelize.DataTypes),
+      pageLength: 3,
     }
   
     global.db.Author.hasOne(global.db.Book);
