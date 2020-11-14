@@ -9,11 +9,18 @@ block content
       input#title.form-control(type='text', placeholder='Name of book' name='title' required='true' value=(undefined===book ? '' : book.title) )
     div.form-group
       label(for='author') Author:
-      select#author.form-control(type='select', placeholder='Select author' name='author' required='true' )
+      select#author.form-control(type='select' placeholder='Select author' name='author' required='true' )
         - authors.sort(function(a, b) {let textA = a.family_name.toUpperCase(); let textB = b.family_name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for author in authors
           if book
-            option(value=author.id selected=(author.id.toString()===book.Author.id.toString() ? 'selected' : false) ) #{author.name}
+            //- Handle GET form, where book.author is an object, and POST form, where it is a string.
+            option(
+              value=author.id
+              selected=(
+                author.id.toString()==book.Author.id
+                || author.id.toString()==book.Author
+              ) ? 'selected' : false
+            ) #{author.name}
           else
             option(value=author.id) #{author.name}
     div.form-group
@@ -27,7 +34,7 @@ block content
       select#genre.form-control(type='select', placeholder='Select genre' name='genre' required='false' )
         - genres.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for genre in genres
-          if book
+          if book && book.Genre
             option(value=genre.id selected=(genre.id.toString()===book.Genre.id.toString() ? 'selected' : false) ) #{genre.name}
           else
             option(value=genre.id) #{genre.name}
