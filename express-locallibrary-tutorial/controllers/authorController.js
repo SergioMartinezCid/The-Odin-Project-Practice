@@ -2,10 +2,23 @@ const { body,validationResult } = require('express-validator');
 
 // Display list of all Authors.
 exports.author_list = async function(req, res) {
+    const count = await db.Author.count();
+    if (parseInt(req.params.page) <= 0 ||
+        (parseInt(req.params.page) - 1)*db.pageLength > count){
+            res.redirect('/catalog/authors');
+    }
+    const index = isNaN(req.params.page) ? 0: parseInt(req.params.page) - 1;
+
     var list_authors = await db.Author.findAll({
-        order: [ ['family_name', 'ASC'] ]
+        order: [ ['family_name', 'ASC'] ],
+        limit: db.pageLength,
+        offset: index*db.pageLength
     });
-    res.render('author_list', { title: 'Author List', author_list: list_authors });
+
+    const link_previous = index === 0 ? undefined : `/catalog/authors/${index}`;
+    const link_next = Math.ceil(count / db.pageLength) <= index + 1 ? undefined : `/catalog/authors/${index + 2}`;
+
+    res.render('author_list', { title: 'Author List', author_list: list_authors, link_previous, link_next });
 };
 
 // Display detail page for a specific Author.

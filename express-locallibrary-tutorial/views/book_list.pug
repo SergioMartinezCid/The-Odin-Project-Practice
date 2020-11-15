@@ -9,6 +9,15 @@ block content
       li 
         a(href=book.url) #{book.title} 
         |  (#{book.Author.name})
+    span
+      if link_previous
+        button(onclick=`location.href='${link_previous}';`) Previous
+      else
+        button(disabled) Previous
+      if link_next
+        button(onclick=`location.href='${link_next}';`) Next
+      else
+        button(disabled) Next
 
-    else
+    if !book_list
       li There are no books.

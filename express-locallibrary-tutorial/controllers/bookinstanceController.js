@@ -2,13 +2,26 @@ const { body,validationResult } = require('express-validator');
 
 // Display list of all BookInstances.
 exports.bookinstance_list = async function(req, res) {
+    const count = await db.BookInstance.count();
+    if (parseInt(req.params.page) <= 0 ||
+        (parseInt(req.params.page) - 1)*db.pageLength > count){
+            res.redirect('/catalog/bookinstances');
+    }
+    const index = isNaN(req.params.page) ? 0: parseInt(req.params.page) - 1;
+
     var list_bookinstances = await db.BookInstance.findAll({
         include: [{
             model: db.Book,
             required: true
-        }]
+        }],
+        limit: db.pageLength,
+        offset: index * db.pageLength
     });
-    res.render('bookinstance_list', { title: 'Book Instance List', bookinstance_list: list_bookinstances });
+
+    const link_previous = index === 0 ? undefined : `/catalog/bookinstances/${index}`;
+    const link_next = Math.ceil(count / db.pageLength) <= index + 1 ? undefined : `/catalog/bookinstances/${index + 2}`;
+
+    res.render('bookinstance_list', { title: 'Book Instance List', bookinstance_list: list_bookinstances, link_previous, link_next });
 };
 
 // Display detail page for a specific BookInstance.

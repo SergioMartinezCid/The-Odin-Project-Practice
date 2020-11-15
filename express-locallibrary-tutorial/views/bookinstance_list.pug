@@ -15,6 +15,15 @@ block content
           span.text-warning #{val.status} 
         if val.status!='Available'
           span  (Due: #{val.due_back_formatted} )
-
+    span
+    if link_previous
+      button(onclick=`location.href='${link_previous}';`) Previous
     else
+      button(disabled) Previous
+    if link_next
+      button(onclick=`location.href='${link_next}';`) Next
+    else
+      button(disabled) Next
+
+    if !bookinstance_list
       li There are no book copies in this library.

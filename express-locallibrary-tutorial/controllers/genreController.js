@@ -2,10 +2,23 @@ const { body, validationResult } = require("express-validator");
 
 // Display list of all Genre.
 exports.genre_list = async function (req, res) {
+    const count = await db.Genre.count();
+    if (parseInt(req.params.page) <= 0 ||
+        (parseInt(req.params.page) - 1)*db.pageLength > count){
+            res.redirect('/catalog/genres');
+    }
+    const index = isNaN(req.params.page) ? 0: parseInt(req.params.page) - 1;
+
     var list_genres = await db.Genre.findAll({
-        order: [['name', 'ASC']]
+        order: [['name', 'ASC']],
+        limit: db.pageLength,
+        offset: index*db.pageLength
     });
-    res.render('genre_list', { title: 'Genre List', genre_list: list_genres });
+
+    const link_previous = index === 0 ? undefined : `/catalog/genres/${index}`;
+    const link_next = Math.ceil(count / db.pageLength) <= index + 1 ? undefined : `/catalog/genres/${index + 2}`;
+
+    res.render('genre_list', { title: 'Genre List', genre_list: list_genres, link_previous, link_next });
 };
 
 // Display detail page for a specific Genre.

@@ -3,3 +3,14 @@
   padding: 0;
   list-style: none;
 }
+
+button{
+  margin: 1rem;
+  border-style: solid;
+  background-color: white;
+  color: #07a4ff;
+}
+
+button:disabled{
+  color:gray;
+}

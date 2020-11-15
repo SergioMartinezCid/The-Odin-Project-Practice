@@ -22,14 +22,27 @@ exports.index = async function (req, res) {
 
 // Display list of all books.
 exports.book_list = async function (req, res, next) {
+    const count = await db.Book.count();
+    if (parseInt(req.params.page) <= 0 ||
+        (parseInt(req.params.page) - 1)*db.pageLength > count){
+            res.redirect('/catalog/books');
+    }
+    const index = isNaN(req.params.page) ? 0: parseInt(req.params.page) - 1;
+
     var list_books = await db.Book.findAll({
         attributes: ['id', 'title'],
         include: [{
             model: db.Author,
             required: true
-        }]
+        }],
+            limit: db.pageLength,
+            offset: index*db.pageLength
     });
-    res.render('book_list', { title: 'Book List', book_list: list_books });
+
+    const link_previous = index === 0 ? undefined : `/catalog/books/${index}`;
+    const link_next = Math.ceil(count / db.pageLength) <= index + 1 ? undefined : `/catalog/books/${index + 2}`;
+
+    res.render('book_list', { title: 'Book List', book_list: list_books, link_previous, link_next });
 };
 
 // Display detail page for a specific book.

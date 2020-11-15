@@ -34,6 +34,7 @@ router.post('/book/:id/update', book_controller.book_update_post);
 router.get('/book/:id', book_controller.book_detail);
 
 // GET request for list of all Book items.
+router.get('/books/:page', book_controller.book_list);
 router.get('/books', book_controller.book_list);
 
 /// AUTHOR ROUTES ///
@@ -60,6 +61,7 @@ router.post('/author/:id/update', author_controller.author_update_post);
 router.get('/author/:id', author_controller.author_detail);
 
 // GET request for list of all Authors.
+router.get('/authors/:page', author_controller.author_list);
 router.get('/authors', author_controller.author_list);
 
 /// GENRE ROUTES ///
@@ -86,6 +88,7 @@ router.post('/genre/:id/update', genre_controller.genre_update_post);
 router.get('/genre/:id', genre_controller.genre_detail);
 
 // GET request for list of all Genre.
+router.get('/genres/:page', genre_controller.genre_list);
 router.get('/genres', genre_controller.genre_list);
 
 /// BOOKINSTANCE ROUTES ///
@@ -112,6 +115,7 @@ router.post('/bookinstance/:id/update', book_instance_controller.bookinstance_up
 router.get('/bookinstance/:id', book_instance_controller.bookinstance_detail);
 
 // GET request for list of all BookInstance.
+router.get('/bookinstances/:page', book_instance_controller.bookinstance_list);
 router.get('/bookinstances', book_instance_controller.bookinstance_list);
 
 module.exports = router;

@@ -7,6 +7,15 @@ block content
     each genre in genre_list
       li 
         a(href=genre.url) #{genre.name} 
+    span
+      if link_previous
+        button(onclick=`location.href='${link_previous}';`) Previous
+      else
+        button(disabled) Previous
+      if link_next
+        button(onclick=`location.href='${link_next}';`) Next
+      else
+        button(disabled) Next
 
-    else
+    if !genre_list
       li There are no genres.
