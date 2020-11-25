@@ -1,7 +1,6 @@
 const db = require('../model/index');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const user = require('../model/user');
 
 // GET request for list of all User items.
 exports.user_list = async function(req, res){
