@@ -15,7 +15,6 @@ exports.post_list = async function(req, res){
 exports.post_create = [
     body('title', 'Title must not be empty').trim().isLength({ min: 3, max: 1000 }).escape(),
     body('content', 'Content must not be empty').trim().isLength({ min: 1 }).escape(),
-    body('UserId', 'UserId must not be empy').trim().isNumeric().escape(),
 
     async (req, res) => {
 
@@ -29,8 +28,7 @@ exports.post_create = [
         else {
             // Data from form is valid. Save user
             try {
-                const user = await db.User.findByPk(parseInt(req.body.UserId));
-                if(user.type != 'AUTHOR'){
+                if(req.user.type != 'AUTHOR'){
                     res.sendStatus(403);
                     return;
                 }
@@ -38,7 +36,7 @@ exports.post_create = [
                 await db.Post.create({
                     title: req.body.title,
                     content: req.body.content,
-                    UserId: req.body.UserId
+                    UserId: req.user.id
                 });
                 res.sendStatus(200);
                 return;
@@ -75,7 +73,6 @@ exports.post_update = async function(req, res, next){
     try {
         post = await db.Post.findOne({
             attributes: ['id'],
-            include: [db.User],
             where: {
                 id: parseInt(req.params.id)
             }
