@@ -24,9 +24,9 @@ if (process.env.DATABASE_URL) {
 db = {
     sequelize,
     sequelizeDB,
-    User: author(sequelizeDB, sequelize.DataTypes),
-    Post: book(sequelizeDB, sequelize.DataTypes),
-    Comment: bookinstance(sequelizeDB, sequelize.DataTypes),
+    User: user(sequelizeDB, sequelize.DataTypes),
+    Post: post(sequelizeDB, sequelize.DataTypes),
+    Comment: comment(sequelizeDB, sequelize.DataTypes),
 }
 
 db.User.hasMany(db.Post);
@@ -38,4 +38,5 @@ db.Comment.belongsTo(db.Post);
 db.User.hasMany(db.Comment);
 db.Comment.belongsTo(db.User);
 
+sequelizeDB.sync();
 module.exports = db
