@@ -62,7 +62,7 @@ exports.post_detail = async function(req, res, next){
             raw: true,
             nest: true
         });
-        res.json(user);
+        res.json(post);
     } catch (err) {
         res.sendStatus(400);
         return;
@@ -71,10 +71,66 @@ exports.post_detail = async function(req, res, next){
 
 // GET request for one User.
 exports.post_update = async function(req, res, next){
-    res.sendStatus(501);
+    let post;
+    try {
+        post = await db.Post.findOne({
+            attributes: ['id'],
+            include: [db.User],
+            where: {
+                id: parseInt(req.params.id)
+            }
+        });
+    } catch (err) {
+        res.sendStatus(400);
+        return;
+    }
+
+    if (req.user.id !== parseInt(post.User.id)) {
+        res.sendStatus(403);
+        return;
+    }
+
+    try {
+        if (req.body.title) {
+            post.title = req.body.title;
+        }
+        if (req.body.content) {
+            post.content = req.body.content;
+        }
+        post.save();
+        res.sendStatus(200);
+    } catch (err) {
+        res.sendStatus(400);
+        return;
+    }
 };
 
 // GET request for one User.
 exports.post_delete = async function(req, res, next){
-    res.sendStatus(501);
+    let post;
+    try {
+        post = await db.Post.findOne({
+            attributes: ['id'],
+            include: [db.User],
+            where: {
+                id: parseInt(req.params.id)
+            }
+        });
+    } catch (err) {
+        res.sendStatus(400);
+        return;
+    }
+
+    if (req.user.id !== parseInt(post.User.id)) {
+        res.sendStatus(403);
+        return;
+    }
+
+    try{
+        post.destroy();
+        res.sendStatus(200);
+    } catch (err) {
+        res.sendStatus(400);
+        return;
+    }
 };
