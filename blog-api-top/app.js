@@ -4,9 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const passport = require('./passport');
+
 const loginRouter = require('./routes/login');
-var blogRouter = require('./routes/blog');
-passport = require('./passport');
+const blogRouter = require('./routes/blog');
+const indexRouter = require('./routes/index');
+const authorRouter = require('./routes/author');
+const readerRouter = require('./routes/reader');
 
 var app = express();
 
@@ -20,8 +24,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/author', passport.authenticate('jwt', {session: false}), authorRouter);
+app.use('/reader', passport.authenticate('jwt', {session: false}), readerRouter);
 app.use('/', passport.authenticate('jwt', {session: false}), blogRouter);
+// app.use('/author', passport.authenticate('jwt', {session: false}), authorRouter);
+// app.use('/reader', passport.authenticate('jwt', {session: false}), readerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -13,9 +13,6 @@ passport.use(new LocalStrategy({
     async (username, password, callback) => {
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
-            console.log(username);
-            console.log(password);
-            console.log(hashedPassword);
             const user = await db.User.findOne({
                 where: { username: username },
                 raw: true
