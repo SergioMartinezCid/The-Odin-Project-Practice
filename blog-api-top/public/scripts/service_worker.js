@@ -1,16 +1,13 @@
-self.addEventListener("fetch", (event) => {
-    var currentUrl = new URL(event.request.url);
-    if (currentUrl.origin === location.origin) {
-        var newRequest = new Request(event.request, {
-            mode: "cors",
-            credentials: "same-origin",
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem('loginToken')}`,
-            }
+// TODO js history push para actualizar el historial cuando se hace window replace en el cliente
+
+self.addEventListener('fetch', async function (event) {
+        event.request.headers.append('Authorization', `Bearer ${sessionStorage.getItem('loginToken')}`);
+        const newRequest = new Request(event.request, {
+            method: request.method,
+            headers: request.headers,
+            mode: 'same-origin', // need to set this properly
+            credentials: request.credentials,
+            redirect: 'manual'   // let browser handle redirects
         });
         event.respondWith(fetch(newRequest));
-    }
-    else {
-        event.respondWith(fetch(event.request));
-    }
 });

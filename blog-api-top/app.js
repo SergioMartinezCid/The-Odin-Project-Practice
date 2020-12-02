@@ -26,11 +26,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
-app.use('/author', passport.authenticate('jwt', {session: false}), authorRouter);
-app.use('/reader', passport.authenticate('jwt', {session: false}), readerRouter);
-app.use('/', passport.authenticate('jwt', {session: false}), blogRouter);
 // app.use('/author', passport.authenticate('jwt', {session: false}), authorRouter);
 // app.use('/reader', passport.authenticate('jwt', {session: false}), readerRouter);
+app.use('/author', authorRouter);
+app.use('/reader', readerRouter);
+app.use('/', passport.authenticate('jwt', {session: false}), blogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
