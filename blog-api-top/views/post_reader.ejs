@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>Post Reader</title>
+    </head>
+    <body>
+        <div>
+            <h1 id='page_title'>Post title</h1>
+            <a id='back_link' href="#"></a>
+        </div>
+        <hr>
+        <textarea id='content'></textarea>
+        <hr>
+        <div>
+            <textarea id="new-comment"></textarea>
+            <button id="post-comment">Post Comment</button>
+        </div>
+        <ul id="comment_list_root">
+
+        </ul>
+        <script>
+            const id = document.URL.match(/([^\/]*)\/*$/)[1]
+            const content_area = document.querySelector('#content');
+            const comment_root = document.querySelector('#comment_list_root');
+            const new_comment = document.querySelector('#new-comment');
+
+            async function getPostAndComments() {
+                const rawResponsePost = await fetch(`/posts/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                    }
+                });
+                post = await rawResponsePost.json();
+                document.title = `${post.title} - Post Reader`;
+                document.querySelector('#page_title').innerText = post.title;
+                content_area.innerText = post.content;
+
+                rawResponseComments = await fetch(`/comments`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                    }
+                });
+                const comments = await rawResponseComments.json();
+
+                comments.forEach(async (commentIdentifier) => {
+                    response = await fetch(`/comments/${commentIdentifier.id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                        }
+                    });
+                    comment = await response.json();
+
+                    const newdiv = document.createElement('div');
+                    newdiv.innerText = comment.content;
+                    const author = document.createElement('small');
+                    author.innerText = comment.User.username;
+                    newdiv.appendChild(author);
+                    comment_root.appendChild(newdiv);
+
+
+                    const backLink = document.querySelector('#back_link');
+                    if (sessionStorage.getItem('userType') === 'AUTHOR'){
+                        backLink.innerText = "Back to author's main page";
+                        backLink.href = '/author';
+                    } else {
+                        backLink.innerText = "Back to reader's main page";
+                        backLink.href = '/reader';
+                    }
+                });
+                }
+                getPostAndComments();
+
+                
+                document.querySelector('#post-comment').addEventListener('click', async () => {
+                    const comment_content = new_comment.value.trim();
+                    if (comment_content == ''){
+                        alert('Empty comments are not allowed');
+                    } else {
+                        const rawResponse = await fetch('/comments', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                            },
+                            body: JSON.stringify({
+                                content: comment_content,
+                                PostId: id 
+                            })
+                        });
+
+                        if (rawResponse.status !== 200) {
+                            window.alert(await rawResponse.text());
+                        } else {
+                            window.location.replace(`/posts_reader/${id}/`);
+                        }
+                    }
+                });
+        </script>
+    </body>
+</html>

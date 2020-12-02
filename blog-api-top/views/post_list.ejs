@@ -3,30 +3,55 @@
         <title>Post list</title>
     </head>
     <body>
-        <h1>Posts of the blog</h1>
-        <div id="list_root">
-
+        <div>
+            <h1>Posts of the blog</h1>
+            <a id='back_link' href="#"></a>
         </div>
+        <hr>
+        <ul id="list_root">
+
+        </ul>
         <script>
             const root = document.querySelector('#list_root');
-        let posts;
-        async function getPosts() {
-            const rawResponse = await fetch('/posts', {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
-                    }
-                });
-                posts = await rawResponse.json();
-                posts.forEach(post => {
-                    const newDiv = document.createElement('div');
-                    newDiv.innerText = post.id;
-                    root.appendChild(newDiv);
-                });
-            }
-            getPosts();
+            let posts;
+            async function getPosts() {
+                const rawResponse = await fetch('/posts', {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                        }
+                    });
+                    posts = await rawResponse.json();
+                    posts.forEach(async (postIdentifier) => {
+                        response = await fetch(`/posts/${postIdentifier.id}`, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                            }
+                        });
+                        post = await response.json();
+
+                        const newli = document.createElement('li');
+                        const postLink = document.createElement('a');
+                        postLink.href = `/posts_reader/${post.id}/`;
+                        postLink.innerText = post.title;
+                        newli.appendChild(postLink);
+                        root.appendChild(newli);
+                        const backLink = document.querySelector('#back_link');
+                        if (sessionStorage.getItem('userType') === 'AUTHOR') {
+                            backLink.innerText = "Back to author's main page";
+                            backLink.href = '/author';
+                        } else {
+                            backLink.innerText = "Back to reader's main page";
+                            backLink.href = '/reader';
+                        }
+                    });
+                }
+                getPosts();
         </script>
     </body>
 </html>

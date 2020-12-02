@@ -1,9 +1,21 @@
 <html>
     <head>
-        <title>Welcome, <%= username %></title>
+        <title>Welcome, </title>
     </head>
     <body>
+        <button id="logout">Log out</button>
+        <hr>
         <h1><a href="/author/new_post">Create a new post</a></h1>
         <h1><a href="/posts_list">See posts</a></h1>
+        <script>
+            document.title += ` ${sessionStorage.getItem('username')}`;
+            document.querySelector('#logout').addEventListener('click', () => {
+                sessionStorage.removeItem('loginToken');
+                sessionStorage.removeItem('username');
+                sessionStorage.removeItem('userId');
+                sessionStorage.removeItem('userType');
+                window.location.replace('/');
+            });
+        </script>
     </body>
 </html>

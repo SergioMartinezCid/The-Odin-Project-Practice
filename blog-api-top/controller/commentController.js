@@ -15,6 +15,7 @@ exports.comment_list = async function (req, res) {
 exports.comment_create = [
     body('content', 'Content must not be empty').trim().isLength({ min: 10, max: 1500 }).escape(),
     body('PostId', 'PostId must not be empy').trim().isNumeric().escape(),
+    body('UserId', 'PostId must not be empy').trim().isNumeric().escape(),
 
     async (req, res) => {
 
@@ -28,10 +29,10 @@ exports.comment_create = [
         else {
             // Data from form is valid. Save user
             try {
-                await db.Post.create({
+                await db.Comment.create({
                     content: req.body.content,
                     PostId: req.body.PostId,
-                    UserId: req.user.id
+                    UserId: req.body.UserId
                 });
 
                 res.sendStatus(200);
@@ -48,7 +49,6 @@ exports.comment_create = [
 exports.comment_detail = async function (req, res, next) {
     try {
         const comment = await db.Comment.findOne({
-            attributes: ['id', 'content'],
             include: [db.User, db.Post],
             where: {
                 id: parseInt(req.params.id)
@@ -56,7 +56,7 @@ exports.comment_detail = async function (req, res, next) {
             raw: true,
             nest: true
         });
-        res.json(post);
+        res.json(comment);
     } catch (err) {
         res.sendStatus(400);
         return;
