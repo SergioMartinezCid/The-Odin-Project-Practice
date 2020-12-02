@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Post list</title>
+    </head>
+    <body>
+        <h1>Posts of the blog</h1>
+        <div id="list_root">
+
+        </div>
+        <script>
+            const root = document.querySelector('#list_root');
+        let posts;
+        async function getPosts() {
+            const rawResponse = await fetch('/posts', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                    }
+                });
+                posts = await rawResponse.json();
+                posts.forEach(post => {
+                    const newDiv = document.createElement('div');
+                    newDiv.innerText = post.id;
+                    root.appendChild(newDiv);
+                });
+            }
+            getPosts();
+        </script>
+    </body>
+</html>

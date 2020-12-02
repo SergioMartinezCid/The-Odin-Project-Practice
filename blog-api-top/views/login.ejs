@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <h1>Please log in our application</h1>
+        <label for="fusername">Username:</label><br>
+        <input type="text" id="fusername" name="username"><br>
+        <label for="fpassword">Password:</label><br>
+        <input type="password" id="fpassword" name="password"><br>
+        <button id="login-submit">Log in</button>
+
+        <script src="/scripts/service_worker.js"></script>
+        <script>
+            document.querySelector('#login-submit').addEventListener('click',
+                async (event) => {
+                    const rawResponse = await fetch('/login', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: document.querySelector('#fusername').value,
+                            password: document.querySelector('#fpassword').value
+                        })
+                    });
+                    const { token, userType } = await rawResponse.json();
+                    sessionStorage.setItem('loginToken', token);
+                    if (userType === 'AUTHOR') {
+                        window.location.replace('/author');
+                    } else {
+                        window.location.replace('/reader');
+                    }
+                });
+        </script>
+    </body>
+</html>
