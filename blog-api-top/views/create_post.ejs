@@ -11,6 +11,7 @@
         <label for="fcontent">Post body:</label><br>
         <textarea id="fcontent" name="content"></textarea><br>
         <button id="post-submit">Create post</button>
+        <script src="/scripts/service_worker_loader.js"></script>
         <script>
             document.title += localStorage.getItem('username');
             document.querySelector('#post-submit').addEventListener('click', async event => {
