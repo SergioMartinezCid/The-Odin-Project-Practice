@@ -8,13 +8,13 @@
         <h1><a href="/author/new_post">Create a new post</a></h1>
         <h1><a href="/posts_list">See posts</a></h1>
         <script>
-            document.title += ` ${sessionStorage.getItem('username')}`;
+            document.title += localStorage.getItem('username');
             document.querySelector('#logout').addEventListener('click', () => {
-                sessionStorage.removeItem('loginToken');
-                sessionStorage.removeItem('username');
-                sessionStorage.removeItem('userId');
-                sessionStorage.removeItem('userType');
-                window.location.replace('/');
+                localStorage.removeItem('loginToken');
+                localStorage.removeItem('username');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userType');
+                window.location.href = '/';
             });
         </script>
     </body>

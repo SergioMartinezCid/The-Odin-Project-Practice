@@ -1,22 +1,25 @@
 <html>
     <head>
-        <title>Welcome, <%= username %></title>
+        <title>Welcome, </title>
     </head>
     <body>
         <h1>Write the post</h1>
+        <a id="back_link" href="/author">Back to author's main page</a>
+        <hr>
         <label for="ftitle">Title:</label><br>
         <input type="text" id="ftitle" name="title"><br>
         <label for="fcontent">Post body:</label><br>
         <textarea id="fcontent" name="content"></textarea><br>
         <button id="post-submit">Create post</button>
         <script>
+            document.title += localStorage.getItem('username');
             document.querySelector('#post-submit').addEventListener('click', async event => {
                 const rawResponse = await fetch('/posts', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                        'Authorization': `Bearer ${localStorage.getItem('loginToken')}`
                     },
                     body: JSON.stringify({
                         title: document.querySelector('#ftitle').value,
@@ -27,7 +30,7 @@
                 if (rawResponse.status !== 200){
                     window.alert(await rawResponse.text());
                 } else {
-                    window.location.replace('/author');
+                    window.location.href = '/author';
                 }
             });
         </script>

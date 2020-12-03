@@ -20,7 +20,7 @@
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                            'Authorization': `Bearer ${localStorage.getItem('loginToken')}`
                         }
                     });
                     posts = await rawResponse.json();
@@ -30,7 +30,7 @@
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                                'Authorization': `Bearer ${localStorage.getItem('loginToken')}`
                             }
                         });
                         post = await response.json();
@@ -42,7 +42,7 @@
                         newli.appendChild(postLink);
                         root.appendChild(newli);
                         const backLink = document.querySelector('#back_link');
-                        if (sessionStorage.getItem('userType') === 'AUTHOR') {
+                        if (localStorage.getItem('userType') === 'AUTHOR') {
                             backLink.innerText = "Back to author's main page";
                             backLink.href = '/author';
                         } else {

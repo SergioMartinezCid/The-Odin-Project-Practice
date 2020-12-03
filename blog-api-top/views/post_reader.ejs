@@ -5,7 +5,7 @@
     <body>
         <div>
             <h1 id='page_title'>Post title</h1>
-            <a id='back_link' href="#"></a>
+            <a id='back_link' href="/posts_list">Back to the list of posts</a>
         </div>
         <hr>
         <textarea id='content'></textarea>
@@ -29,7 +29,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                        'Authorization': `Bearer ${localStorage.getItem('loginToken')}`
                     }
                 });
                 post = await rawResponsePost.json();
@@ -42,7 +42,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                        'Authorization': `Bearer ${localStorage.getItem('loginToken')}`
                     }
                 });
                 const comments = await rawResponseComments.json();
@@ -53,21 +53,24 @@
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                            'Authorization': `Bearer ${localStorage.getItem('loginToken')}`
                         }
                     });
                     comment = await response.json();
 
-                    const newdiv = document.createElement('div');
-                    newdiv.innerText = comment.content;
+                    const newComment = document.createElement('div');
+                    const commentContent = document.createElement('div');
+                    commentContent.innerText = comment.content;
                     const author = document.createElement('small');
                     author.innerText = comment.User.username;
-                    newdiv.appendChild(author);
-                    comment_root.appendChild(newdiv);
+                    newComment.appendChild(commentContent);
+                    newComment.appendChild(author);
+                    newComment.style.margin = '1rem';
+                    comment_root.appendChild(newComment);
 
 
                     const backLink = document.querySelector('#back_link');
-                    if (sessionStorage.getItem('userType') === 'AUTHOR'){
+                    if (localStorage.getItem('userType') === 'AUTHOR'){
                         backLink.innerText = "Back to author's main page";
                         backLink.href = '/author';
                     } else {
@@ -89,18 +92,19 @@
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
+                                'Authorization': `Bearer ${localStorage.getItem('loginToken')}`
                             },
                             body: JSON.stringify({
                                 content: comment_content,
-                                PostId: id 
+                                PostId: id,
+                                UserId: localStorage.getItem('userId')
                             })
                         });
 
                         if (rawResponse.status !== 200) {
                             window.alert(await rawResponse.text());
                         } else {
-                            window.location.replace(`/posts_reader/${id}/`);
+                            window.location.href = `/posts_reader/${id}/`;
                         }
                     }
                 });
