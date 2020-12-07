@@ -59,17 +59,18 @@
                     });
                     comment = await response.json();
 
-                    const newComment = document.createElement('div');
-                    const commentContent = document.createElement('div');
-                    commentContent.innerText = comment.content;
-                    const author = document.createElement('small');
-                    author.innerText = comment.User.username;
-                    newComment.appendChild(commentContent);
-                    newComment.appendChild(author);
-                    newComment.style.margin = '1rem';
-                    comment_root.appendChild(newComment);
-
-
+                    if (comment.PostId === parseInt(id)){
+                        const newComment = document.createElement('div');
+                        const commentContent = document.createElement('div');
+                        commentContent.innerText = comment.content;
+                        const author = document.createElement('small');
+                        author.innerText = comment.User.username;
+                        newComment.appendChild(commentContent);
+                        newComment.appendChild(author);
+                        newComment.style.margin = '1rem';
+                        comment_root.appendChild(newComment);
+                    }
+                });
                     const backLink = document.querySelector('#back_link');
                     if (localStorage.getItem('userType') === 'AUTHOR'){
                         backLink.innerText = "Back to author's main page";
@@ -78,7 +79,6 @@
                         backLink.innerText = "Back to reader's main page";
                         backLink.href = '/reader';
                     }
-                });
                 }
                 getPostAndComments();
 
