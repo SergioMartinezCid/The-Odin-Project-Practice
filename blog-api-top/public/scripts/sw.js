@@ -1,8 +1,3 @@
-//Fetch Events
-self.addEventListener('fetch', async (event) => {
-    event.respondWith(await fetch('www.google.com'));
-})
-/*
 self.addEventListener('fetch', async function (event) {
         event.request.headers.append('Authorization', `Bearer ${localStorage.getItem('loginToken')}`);
         const newRequest = new Request(event.request, {
@@ -12,6 +7,4 @@ self.addEventListener('fetch', async function (event) {
             credentials: request.credentials,
             redirect: 'manual'   // let browser handle redirects
         });
-        event.respondWith(fetch(newRequest));
-});
-*/
+}
