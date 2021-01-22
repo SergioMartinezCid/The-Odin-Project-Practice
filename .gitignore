@@ -2,3 +2,4 @@ node_modules
 bin
 .vscode
 .swp
+.not_git
