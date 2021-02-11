@@ -1,0 +1,30 @@
+{
+  "name": "authetication-test-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js",
+    "devstart": "DEBUG=authentication-test-app:* nodemon app.js",
+    "connect_and_start": "DATABASE_URL=$(heroku config:get DATABASE_URL -a authentication-test-app) npm start",
+    "connect_and_devstart": "DATABASE_URL=$(heroku config:get DATABASE_URL -a authentication-test-app) npm run devstart"
+  },
+  "author": "Sergio Martinez Cid",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "engines": {
+    "node": "15.0.1"
+  }
+}
