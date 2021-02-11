@@ -1,21 +1,30 @@
-module.exports = (sequelize, DataTypes) => {
-    return sequelize.define("User", {
+module.exports = (sequelize, DataTypes, User) => {
+    return sequelize.define("Friendship", {
         id: {
           type: DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true
         },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: { len: [3, 1000] }
-        },
-        password: {
-            type: DataTypes.STRING,
+        requestingFriendId: {
+            type: DataTypes.INTEGER,
+            references: {
+              model: User,
+              key: 'id'
+            }
+          },
+          friendBeingRequestedId: {
+            type: DataTypes.INTEGER,
+            references: {
+              model: User,
+              key: 'id'
+            },
+        }, 
+        answered: {
+            type: DataTypes.BOOLEAN,
             allowNull: false
         },
-        type: {
-            type: DataTypes.ENUM('AUTHOR', 'USER'),
+        accepted: {
+            type: DataTypes.BOOLEAN,
             allowNull: false
         }
     });

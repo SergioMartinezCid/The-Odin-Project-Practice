@@ -5,11 +5,6 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true,
           primaryKey: true
         },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: { len: [3, 1000] }
-        },
         content: {
             type: DataTypes.TEXT,
             allowNull: false

@@ -8,14 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         username: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate: { len: [3, 1000] }
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        type: {
-            type: DataTypes.ENUM('AUTHOR', 'USER'),
             allowNull: false
         }
     });
