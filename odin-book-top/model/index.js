@@ -1,6 +1,5 @@
 const user = require('./user');
 const post = require('./post');
-const like = require('./like');
 const friendship = require('./friendship');
 
 const sequelize = require('sequelize')

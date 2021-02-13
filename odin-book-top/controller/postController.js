@@ -13,7 +13,6 @@ exports.post_list = async function (req, res) {
 
 // POST request for creating User.
 exports.post_create = [
-    body('title', 'Title must not be empty').trim().isLength({ min: 3, max: 1000 }).escape(),
     body('content', 'Content must not be empty').trim().isLength({ min: 1 }).escape(),
 
     async (req, res) => {
@@ -28,13 +27,7 @@ exports.post_create = [
         else {
             // Data from form is valid. Save user
             try {
-                if (req.user.type != 'AUTHOR') {
-                    res.sendStatus(403);
-                    return;
-                }
-
                 await db.Post.create({
-                    title: req.body.title,
                     content: req.body.content,
                     UserId: req.user.id
                 });
@@ -52,8 +45,11 @@ exports.post_create = [
 exports.post_detail = async function (req, res, next) {
     try {
         const post = await db.Post.findOne({
-            attributes: ['id', 'title', 'content'],
-            include: [db.User, db.Comment],
+            attributes: ['id', 'content'],
+            include: [{
+                model: db.User,
+                attributes: ['id']
+            }],
             where: {
                 id: parseInt(req.params.id)
             },
@@ -67,9 +63,8 @@ exports.post_detail = async function (req, res, next) {
     }
 };
 
-// GET request for one User.
+// PUT request for one User.
 exports.post_update = [
-    body('title', 'Title must not be empty').trim().isLength({ min: 3, max: 1000 }).escape(),
     body('content', 'Content must not be empty').trim().isLength({ min: 1 }).escape(),
 
 
@@ -101,9 +96,6 @@ exports.post_update = [
         }
 
         try {
-            if (req.body.title) {
-                post.title = req.body.title;
-            }
             if (req.body.content) {
                 post.content = req.body.content;
             }

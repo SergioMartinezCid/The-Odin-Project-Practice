@@ -14,8 +14,8 @@ exports.user_list = async function (req, res) {
 
 // POST request for creating User.
 exports.user_create = [
-    body('username', 'Username must not be empty').trim().isLength({ min: 3, max: 1000 }).escape(),
-    body('password', 'Password must not be empty').trim().isLength({ min: 6, max: 20 }).escape(),
+    body('username', 'Username must not be empty').trim().isLength({ min: 3, max: 50 }).escape(),
+    body('password', 'Password must not be empty').trim().isLength({ min: 6, max: 50 }).escape(),
 
     async (req, res) => {
 
@@ -32,8 +32,7 @@ exports.user_create = [
                 const hashedPassword = await bcrypt.hash(req.body.password, 10);
                 await db.User.create({
                     username: req.body.username,
-                    password: hashedPassword,
-                    type: 'USER'
+                    password: hashedPassword
                 });
                 res.sendStatus(200);
                 return;
@@ -49,8 +48,11 @@ exports.user_create = [
 exports.user_detail = async function (req, res, next) {
     try {
         const user = await db.User.findOne({
-            attributes: ['id', 'username', 'type'],
-            include: [db.Post, db.Comment],
+            attributes: ['id', 'username'],
+            include: [{
+                model: db.Post,
+                attributes: ['id']
+            }],
             where: {
                 id: parseInt(req.params.id)
             },
@@ -64,7 +66,7 @@ exports.user_detail = async function (req, res, next) {
     }
 };
 
-// GET request for one User.
+// PUT request for one User.
 exports.user_update = [
     body('username', 'Username must not be empty').trim().isLength({ min: 3, max: 1000 }).escape(),
     body('password', 'Password must not be empty').trim().isLength({ min: 6, max: 20 }).escape(),
@@ -103,7 +105,7 @@ exports.user_update = [
         }
     }];
 
-// GET request for one User.
+// DELETE request for one User.
 exports.user_delete = async function (req, res, next) {
     if (req.user.id !== parseInt(req.params.id)) {
         res.sendStatus(403);
