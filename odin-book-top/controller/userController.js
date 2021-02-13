@@ -49,10 +49,6 @@ exports.user_detail = async function (req, res, next) {
     try {
         const user = await db.User.findOne({
             attributes: ['id', 'username'],
-            include: [{
-                model: db.Post,
-                attributes: ['id']
-            }],
             where: {
                 id: parseInt(req.params.id)
             },

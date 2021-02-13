@@ -1,8 +1,9 @@
 const user = require('./user');
 const post = require('./post');
+const like = require('./like');
 const friendship = require('./friendship');
+const sequelize = require('sequelize');
 
-const sequelize = require('sequelize')
 let sequelizeDB = null
 
 if (process.env.DATABASE_URL) {
@@ -22,20 +23,19 @@ if (process.env.DATABASE_URL) {
 }
 
 const UserInstantiation = user(sequelizeDB, sequelize.DataTypes);
+const PostInstantiation = post(sequelizeDB, sequelize.DataTypes);
 
 db = {
     sequelize,
     sequelizeDB,
     User: UserInstantiation,
-    Post: post(sequelizeDB, sequelize.DataTypes),
+    Post: PostInstantiation,
+    Like: like(sequelizeDB, sequelize.DataTypes, UserInstantiation, PostInstantiation),
     Friendship: friendship(sequelizeDB, sequelize.DataTypes, UserInstantiation)
 }
 
 db.User.hasMany(db.Post);
 db.Post.belongsTo(db.User);
-
-db.Post.belongsToMany(db.User, { through: 'Like' });
-db.User.belongsToMany(db.Post, { through: 'Like' });
 
 sequelizeDB.sync();
 module.exports = db
