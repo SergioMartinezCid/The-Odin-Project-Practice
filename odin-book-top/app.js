@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', publicViewsRouter);
-app.use('/login/', loginRouter);
+app.use('/', loginRouter);
 app.use(express.static(path.join(__dirname, 'public/not_logged_in')));
 
 app.use('/', passport.authenticate('jwt', {session: false}), privateViewsRouter);

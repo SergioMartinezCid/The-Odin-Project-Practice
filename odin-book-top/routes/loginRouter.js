@@ -5,7 +5,7 @@ const passport = require('passport');
 var user_controller = require('../controller/userController');
 
 // POST login
-router.post('/', function(req, res, next){
+router.post('/login/', function(req, res, next){
     passport.authenticate('local', { session: false }, (err, user, info) => {
         if (err || !user) {
             return res.status(400).json({
@@ -26,7 +26,7 @@ router.post('/', function(req, res, next){
 });
 
 // POST request for creating User.
-router.post('/', user_controller.user_create);
+router.post('/user/', user_controller.user_create);
 
 
 module.exports = router;
